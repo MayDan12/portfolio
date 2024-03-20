@@ -1,0 +1,14 @@
+<!-- update_hive.html -->
+
+{% extends 'hive_manager/base.html' %}
+
+{% block title %}Update Hive{% endblock title%}
+
+{% block main %}
+    <h1>Update Hive</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Update</button>
+    </form>
+{% endblock main %}

@@ -17,7 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('accounts.urls'))
+    path('', include('accounts.urls')),
+    path('', include('hive_manager.urls')),
+    path('create_hive/', include('hive_manager.urls')),
+    # path('', views.hive_detail, name='hive_detail'),
+    # path('', views.update_hive, name='update_hive'),
+    # path('', views.delete_hive, name='delete_hive'),
+
 ]

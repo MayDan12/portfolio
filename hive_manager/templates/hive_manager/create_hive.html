@@ -1,0 +1,14 @@
+<!-- create_hive.html -->
+
+{% extends 'hive_manager/base.html' %}
+
+{% block title %}Create Hive{% endblock title %}
+
+{% block main %}
+    <h1>Create Hive</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create</button>
+    </form>
+{% endblock main %}

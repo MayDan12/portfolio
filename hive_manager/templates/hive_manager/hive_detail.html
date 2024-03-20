@@ -1,0 +1,14 @@
+{% extends 'hive_manager/base.html' %}
+
+{% block title %}Hive Detail{% endblock %}
+
+{% block main %}
+    <h1>Hive Detail: {{ hive.name }}</h1>
+    <h2>Queen Bee: {{ hive.queen_bee.username }}</h2>
+    <h2>Members:</h2>
+    <ul>
+        {% for membership in memberships %}
+            <li>{{ membership.user.username }} - {{ membership.role }}</li>
+        {% endfor %}
+    </ul>
+{% endblock main %}

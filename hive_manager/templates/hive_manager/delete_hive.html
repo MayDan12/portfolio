@@ -1,0 +1,15 @@
+<!-- delete_hive.html -->
+
+{% extends 'hive_manager/base.html' %}
+
+{% block title %}Delete Hive{% endblock title %}
+
+{% block main %}
+    <h1>Delete Hive</h1>
+    <p>Are you sure you want to delete "{{ hive.name }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+        <a href="{% url 'hive_detail' hive_id=hive.id %}">Cancel</a>
+    </form>
+{% endblock main %}
