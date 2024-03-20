@@ -35,3 +35,6 @@ def contact(request):
 def home(request):
     return render(request, 'accounts/home.html')
 
+def about(request):
+    return render(request, 'accounts/about.html')
+
