@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Django App{% endblock title %}</title>
+
+    <!-- Add your CSS stylesheets or links here -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to InHive</h1>
+        <!-- Add navigation links or menus here -->
+        <nav>
+            <ul>
+                {% comment %} <li><a href="{% url 'home' %}">Home</a></li> {% endcomment %}
+                <li><a href="{% url 'register' %}">Register</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'contact' %}">contact</a></li>
+                <!-- Add more navigation links as needed -->
+            </ul>
+        </nav>
+    </header>
+
+        {% block main %}
+        <!-- This block will be overridden by child templates -->
+        {% endblock main %}
+
+
+     {% block content %}
+        <!-- This block will be overridden by child templates -->
+        {% endblock content %}
+
+    <footer>
+        <!-- Add footer content here -->
+        <p>&copy; 2024 My Django App. All rights reserved.</p>
+    </footer>
+
+    <!-- Add your JavaScript files or links here -->
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

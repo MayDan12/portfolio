@@ -1,0 +1,25 @@
+# Ignore virtual environment
+myenv/
+
+# Ignore Django's database file
+db.sqlite3
+
+# settings.py
+settings.py
+
+# Ignore local settings file
+myproject/settings/local.py
+
+# Ignore IDE or editor specific files and directories
+.idea/
+.vscode/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+
+# Ignore log files
+*.log
