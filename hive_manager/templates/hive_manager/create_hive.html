@@ -3,12 +3,21 @@
 {% extends 'hive_manager/base.html' %}
 
 {% block title %}Create Hive{% endblock title %}
+    <nav>
+        <ul>
+            <li><a href="{% url 'create_hive' %}">Create Hive</a></li>
+            {% comment %} <li><a href="{% url 'hive_detail' %}">Hive List</a></li>
+            <li><a href="{% url 'update_hive' hive_id=hive.id %}">Update Hive</a></li>
+            <li><a href="{% url 'delete_hive' hive_id=hive.id %}">Delete Hive</a></li>
+            <!-- Add more navigation links as needed --> {% endcomment %}
+        </ul>
+    </nav>
 
-{% block main %}
+{% block content %}
     <h1>Create Hive</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Create</button>
     </form>
-{% endblock main %}
+{% endblock content %}

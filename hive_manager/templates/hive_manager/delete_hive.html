@@ -4,12 +4,12 @@
 
 {% block title %}Delete Hive{% endblock title %}
 
-{% block main %}
+{% block content %}
     <h1>Delete Hive</h1>
     <p>Are you sure you want to delete "{{ hive.name }}"?</p>
     <form method="post">
         {% csrf_token %}
         <button type="submit">Delete</button>
-        <a href="{% url 'hive_detail' hive_id=hive.id %}">Cancel</a>
+        <a href="{% url 'hive_manager/hive_detail' hive_id=hive.id %}">Cancel</a>
     </form>
-{% endblock main %}
+{% endblock content %}

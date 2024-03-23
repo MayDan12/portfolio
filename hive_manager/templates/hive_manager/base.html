@@ -5,23 +5,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Hive Management{% endblock %}</title>
+    <title>{% block title %}{% endblock %}</title>
     <!-- Add your CSS and JavaScript links here -->
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="{% url 'hive_list' %}">Hive List</a></li>
-            <li><a href="{% url 'create_hive' %}">Create Hive</a></li>
-            <li><a href="{% url 'update_hive' hive_id=hive.id %}">Update Hive</a></li>
-            <li><a href="{% url 'delete_hive' hive_id=hive.id %}">Delete Hive</a></li>
-            <!-- Add more navigation links as needed -->
-        </ul>
-    </nav>
-    <main>
-        {% block main %}
-        <!-- Content for child templates will be placed here -->
-        {% endblock main %}
-    </main>
+
+    {% block content %}
+    {% endblock content %}
+
 </body>
 </html>

@@ -4,11 +4,11 @@
 
 {% block title %}Update Hive{% endblock title%}
 
-{% block main %}
+{% block content %}
     <h1>Update Hive</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Update</button>
     </form>
-{% endblock main %}
+{% endblock content %}

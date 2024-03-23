@@ -1,5 +1,5 @@
 """
-URL configuration for inhive project.
+URL configuration for in_hive project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.0/topics/http/urls/
@@ -16,15 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
+from hive_manager import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('accounts.urls')),
-    path('', include('hive_manager.urls')),
-    path('create_hive/', include('hive_manager.urls')),
-    # path('', views.hive_detail, name='hive_detail'),
-    # path('', views.update_hive, name='update_hive'),
-    # path('', views.delete_hive, name='delete_hive'),
+    # path('', include('hive_manager.urls')),
+    # path('create_hive/', include('hive_manager.urls')),
+    # path('hive_detail/', include('hive_manager.urls')),
+    # path('update_hive/', include('hive_manager.urls')),
+    # path('delete_hive/', include('hive_manager.urls')),
 
 ]
