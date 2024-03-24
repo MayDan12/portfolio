@@ -1,0 +1,36 @@
+{% extends 'accounts/base.html' %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Dashboard</h2>
+
+    <div class="task-section">
+        <h3>Tasks</h3>
+        <ul>
+            {% for task in tasks %}
+            <li>{{ task.title }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="hive-section">
+        <h3>Hives</h3>
+        <ul>
+            {% for hive in hives %}
+            <li>{{ hive.title }}</li>
+            <li>{{ hive.HiveOwner }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="membership-section">
+        <h3>Memberships</h3>
+        <ul>
+            {% for membership in memberships %}
+            <li>{{ membership.user.username }} - {{ membership.role }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock content %}

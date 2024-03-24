@@ -5,8 +5,9 @@ from accounts import views as user_views
 urlpatterns = [
     path('signup/', user_views.register, name='register'),
     path('login/', user_views.user_login, name='login'),
-    # path('logout/', views.user_logout, name='logout'),
-    # path('contact/', views.contact, name='contact'),
+    path('logout/', user_views.user_logout, name='logout'),
+    path('contact/', user_views.contact, name='contact'),
     path('home/', user_views.home, name='home'),
-    # path('about/', views.about, name='about'),
+    path('dashboard/', user_views.dashboard, name='dashboard'),
+    path('about/', user_views.about, name='about'),
 ]
