@@ -28,10 +28,30 @@
 
         <h2>Your Tasks:</h2>
         <ul class="task-list">
-            {% for task in user_tasks %}
-                <li>{{ task.title }}</li>
+            {% for task in tasks %}
+                <li><a href="{% url 'hive_manager:task_detail' task.id %}">{{ task.title }}</a></li>
             {% empty %}
                 <li>No tasks found</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Events:</h2>
+        <ul class="event-list">
+            {% for event in events %}
+                <li>>{{ event.title }}</li>
+                <li>>{{ event.start_time }}</li>
+                <li>>{{ event.end_time }}</li>
+            {% empty %}
+                <li>No Events yet</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Membership:</h2>
+        <ul class="membership-list">
+            {% for membership in memberships %}
+                <li>{{ membership.hive }}</li>
+            {% empty %}
+                <li>No membership</li>
             {% endfor %}
         </ul>
 
@@ -39,25 +59,30 @@
         <div id="calendar"></div>
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
-                },
-                events: [
-                    // Sample events data (replace with actual events)
-                    { title: 'Event 1', start: '2022-10-01' },
-                    { title: 'Event 2', start: '2022-10-05', end: '2022-10-07' },
-                    { title: 'Event 3', start: '2022-10-09T12:30:00' }
-                ]
-            });
-            calendar.render();
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            events: [
+                {% for event in events %}
+                {
+                    title: '{{ event.title }}',
+                    start: '{{ event.start_date }}',
+                    end: '{{ event.end_date }}'
+                }
+                {% if not forloop.last %},{% endif %}
+                {% endfor %}
+            ]
         });
-    </script>
+        calendar.render();
+    });
+</script>
+
     {% endblock content %}
 </body>
 </html>

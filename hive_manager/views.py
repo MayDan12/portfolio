@@ -1,7 +1,7 @@
 # from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Hive, Membership, Task
+from .models import Hive, Membership, Task, Event
 from .forms import HiveForm, TaskForm
 from django.shortcuts import render, get_object_or_404, redirect
 
@@ -95,20 +95,19 @@ def delete_task(request, task_id):
 
 
 
-
-
-
 @login_required
 def dashboard(request):
     # Fetch data from models
-    # tasks = Task.objects.all()
+    tasks = Task.objects.all()
     hives = Hive.objects.all()
     memberships = Membership.objects.all()
+    events = Event.objects.all()  # Query all events from the database
 
     context = {
-        # 'tasks': tasks,
+        'tasks': tasks,
         'hives': hives,
         'memberships': memberships,
+        'events': events
     }
     return render(request, 'hive_manager/dashboard.html', context)
 
