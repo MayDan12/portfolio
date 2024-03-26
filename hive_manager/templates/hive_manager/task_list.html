@@ -1,0 +1,22 @@
+<!-- hive_list.html -->
+{% extends 'hive_manager/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}Task List {% endblock title %}
+</head>
+<body>
+    {% block content %}
+    <h1>Task List</h1>
+    <ul>
+        {% for task in tasks %}
+            <li><a href="{% url 'hive_manager:task_detail' task_id=task.id %}">{{ task.title }}</a></li>
+        {% empty %}
+            <li>No Task found.</li>
+        {% endfor %}
+    </ul>
+    {% endblock content %}
+</body>
+</html>

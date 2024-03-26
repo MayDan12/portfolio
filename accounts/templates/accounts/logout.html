@@ -1,5 +1,35 @@
-{% extends 'accounts/base.html' %}
+{% extends "accounts/base.html" %}
+{% block content %}
+  <h2>You have been Logged out!!</h2>
+  <div class="border-top pt-3">
+    <small class="text-muted">
+      Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Sign In again!</a>
+    </small>
+  </div>
+  {% comment %} <form action="{% url 'logout' %}" method="post">
+  {% csrf_token %}
+  <button type="submit">Logout</button>
+</form> {% endcomment %}
+
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} {% extends 'accounts/base.html' %}
 {% block content %}
   <h2>Logged out!!</h2>
 
-{% endblock content %}
+{% endblock content %} {% endcomment %}

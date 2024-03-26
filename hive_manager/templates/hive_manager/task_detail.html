@@ -1,0 +1,18 @@
+{% extends 'hive_manager/base.html' %}
+
+{% block title %}Task Detail{% endblock %}
+
+{% block content %}
+    <h1>Task Detail: {{ task.title}}</h1>
+    <h2>Taskee: {{ task.assignedTo }}</h2>
+    <h2>Description: {{ task.description }}</h2>
+    <h2>Start-Date: {{task.StartDate }}</h2>
+    <h2>Deadline: {{task.EndDate }}</h2>
+    {% comment %} <h2>Status: {{hive.status }}</h2> {% endcomment %}
+    {% comment %} <ul>
+        {% for membership in memberships %}
+            <li>{{ hive.HiveOwner }} - {{ membership.role }}</li>
+        {% endfor %}
+    </ul> {% endcomment %}
+
+{% endblock content %}

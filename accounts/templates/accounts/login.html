@@ -1,15 +1,4 @@
-{% extends 'accounts/base.html' %}
-{% block content %}
-  <h2>Login</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-  </form>
-{% endblock content %}
-
-
-{% comment %} {% extends "accounts/base.html" %}
+{% extends "accounts/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
     <div class="content-section">
@@ -29,4 +18,15 @@
             </small>
         </div>
     </div>
+{% endblock content %}
+
+
+{% comment %} {% extends 'accounts/base.html' %}
+{% block content %}
+  <h2>Login</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+  </form>
 {% endblock content %} {% endcomment %}

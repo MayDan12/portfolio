@@ -1,0 +1,22 @@
+<!-- hive_list.html -->
+{% extends 'hive_manager/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}Hive List {% endblock title %}
+</head>
+<body>
+    {% block content %}
+    <h1>Hive List</h1>
+    <ul>
+        {% for hive in hives %}
+            <li><a href="{% url 'hive_manager:hive_detail' hive_id=hive.id %}">{{ hive.title }}</a></li>
+        {% empty %}
+            <li>No hives found.</li>
+        {% endfor %}
+    </ul>
+    {% endblock content %}
+</body>
+</html>

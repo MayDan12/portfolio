@@ -47,7 +47,11 @@ class Membership(models.Model):
         ('QueenBee', 'QueenBee'),
         ('Soldier', 'Soldier')
     ]
-    role = models.CharField(max_length=20, choices=roleChoices)
+    # constant BEE
+    QueenBee = 'QueenBee'
+    role = models.CharField(max_length=20, choices=roleChoices, default=QueenBee)
+
+
 
     def __str__(self):
         return "{} - {} ({})".format(str(self.User.id), str(self.hive), str(self.role))

@@ -1,0 +1,64 @@
+{% extends 'hive_manager/base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}Dashboard{% endblock %}
+
+    {% comment %} <link rel="stylesheet" type="text/css" href="{% static 'tasks/css/styles.css' %}"> {% endcomment %}
+    <!-- Placeholder for calendar integration -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.0/main.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.0/main.min.css" rel="stylesheet">
+</head>
+<body>
+    {% block content %}
+
+    <div class="container">
+        <h1>Welcome to Your Dashboard</h1>
+
+        <h2>Your Hive:</h2>
+        <ul class="hive-list">
+            {% for hive in hives %}
+                <li><a href="{% url 'hive_manager:hive_detail' hive.id %}">{{ hive.title }}</a></li>
+            {% empty %}
+                <li>No Hive found</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Your Tasks:</h2>
+        <ul class="task-list">
+            {% for task in user_tasks %}
+                <li>{{ task.title }}</li>
+            {% empty %}
+                <li>No tasks found</li>
+            {% endfor %}
+        </ul>
+
+        <!-- Placeholder for calendar widget -->
+        <div id="calendar"></div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                events: [
+                    // Sample events data (replace with actual events)
+                    { title: 'Event 1', start: '2022-10-01' },
+                    { title: 'Event 2', start: '2022-10-05', end: '2022-10-07' },
+                    { title: 'Event 3', start: '2022-10-09T12:30:00' }
+                ]
+            });
+            calendar.render();
+        });
+    </script>
+    {% endblock content %}
+</body>
+</html>
+

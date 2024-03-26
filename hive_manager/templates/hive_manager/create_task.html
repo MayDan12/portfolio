@@ -1,0 +1,23 @@
+<!-- create_hive.html -->
+
+{% extends 'hive_manager/base.html' %}
+
+{% block title %}Create Task{% endblock title %}
+    <nav>
+        <ul>
+            <li><a href="{% url 'create_hive' %}">Create Task</a></li>
+            {% comment %} <li><a href="{% url 'hive_detail' %}">Hive List</a></li>
+            <li><a href="{% url 'update_hive' hive_id=hive.id %}">Update Hive</a></li>
+            <li><a href="{% url 'delete_hive' hive_id=hive.id %}">Delete Hive</a></li>
+            <!-- Add more navigation links as needed --> {% endcomment %}
+        </ul>
+    </nav>
+
+{% block content %}
+    <h1>Create Task</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create Task</button>
+    </form>
+{% endblock content %}
