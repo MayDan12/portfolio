@@ -11,6 +11,7 @@ from django.contrib.auth import logout
 from django.views.generic import View
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
+from .forms import UserRegisterForm
 
 
 class CustomLogoutView(View):
@@ -23,14 +24,14 @@ class CustomLogoutView(View):
 @csrf_protect
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f'Account created you can now login!')
             return redirect('login')
     else:
-        form = UserCreationForm()
+        form = UserRegisterForm()
     return render(request, 'accounts/register.html', {'form': form})
 
 # @csrf_protect
