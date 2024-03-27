@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import UserCreationForm
+# from django.contrib.auth.forms import UserCreationForm
 # from django.contrib.auth import logout
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -11,7 +11,7 @@ from django.contrib.auth import logout
 from django.views.generic import View
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
-from .forms import UserRegisterForm
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 
 
 class CustomLogoutView(View):
@@ -57,7 +57,27 @@ def register(request):
 # user must be logged in to view profile
 @login_required
 def profile(request):
-    return render(request, 'accounts/profile.html')
+    if request.method == 'POST':
+        user_form = UserUpdateForm(request.POST, instance=request.user)
+        profile_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.userprofile)
+
+        if user_form.is_valid() and profile_form.is_valid:
+            user_form.save()
+            profile_form.save()
+
+            messages.success(request, f'Account Updated!')
+            return redirect('profile')
+
+    else:
+        user_form = UserUpdateForm(instance=request.user)
+        profile_form = ProfileUpdateForm(instance=request.user.userprofile)
+
+    dummy = {
+        'user_form': user_form,
+        'profile_form': profile_form
+    }
+
+    return render(request, 'accounts/profile.html', dummy)
 
 def contact(request):
     return render(request, 'accounts/contact.html')
