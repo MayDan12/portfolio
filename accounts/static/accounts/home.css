@@ -397,6 +397,10 @@ header a {
     font-size: 2rem;
 }
 
+.explain {
+  margin-bottom: 2rem;
+}
+
 footer {
     background-color: white;
     /* display: grid;
