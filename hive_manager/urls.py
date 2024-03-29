@@ -1,7 +1,14 @@
 
 from django.urls import path
 from . import views
-from .views import HiveListView, HiveDetailView, HiveCreateView, HiveUpdateView, HiveDeleteView
+from .views import (HiveListView,
+                    HiveDetailView,
+                    HiveCreateView,
+                    HiveUpdateView,
+                    HiveDeleteView,
+                    TaskListView,
+                    TaskDetailView,
+                    TaskCreateView, TaskUpdateView, TaskDeleteView)
 
 
 # app_name = 'hive_manager'
@@ -22,11 +29,11 @@ urlpatterns = [
 
 
     # Task URL
-    path('create_task/', views.create_task, name='create_task'),
-    path('update_task/<int:task_id>', views.update_task, name='update_task'),
-    path('delete_task/<int:task_id>', views.delete_task, name='delete_task'),
-    path('task_detail/<int:task_id>', views.task_detail, name='task_detail'),
-    path('task_list/', views.task_list, name='task_list'),
+    path('task_list/', TaskListView.as_view(), name='task_list'),
+    path('task_update/<int:pk>', TaskUpdateView.as_view(), name='task_update'),
+    path('task_delete/<int:pk>', TaskDeleteView.as_view(), name='task_delete'),
+    path('task_detail/<int:pk>', TaskDetailView.as_view(), name='task_detail'),
+    path('new_task/', TaskCreateView.as_view(), name='create_task'),
 
     # path('<int:hive_id>', views.hive_detail, name='hive_detail'),
     # path('<int:hive_id>', views.update_hive, name='update_hive'),

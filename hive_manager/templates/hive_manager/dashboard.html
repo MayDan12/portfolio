@@ -27,21 +27,21 @@
             {% endfor %}
         </ul>
 
-        {% comment %} <h2>Your Tasks:</h2>
+        <h2>Your Tasks:</h2>
         <ul class="task-list">
             {% for task in tasks %}
-                <li><a href="{% url 'hive_manager:task_detail' task.id %}">{{ task.title }}</a></li>
+                <li><a href="{% url 'task_detail' task.id %}">{{ task.title }}</a></li>
             {% empty %}
                 <li>No tasks found</li>
             {% endfor %}
-        </ul> {% endcomment %}
+        </ul>
 
         <h2>Events:</h2>
         <ul class="event-list">
             {% for event in events %}
-                <li>>{{ event.title }}</li>
-                <li>>{{ event.start_time }}</li>
-                <li>>{{ event.end_time }}</li>
+                <li>{{ event.title }}</li>
+                <li>{{ event.start_time }}</li>
+                <li>{{ event.end_time }}</li>
             {% empty %}
                 <li>No Events yet</li>
             {% endfor %}

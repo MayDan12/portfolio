@@ -47,6 +47,9 @@ class Task(models.Model):
     def __str__(self):
                 return str(self.id) + " " + self.title
 
+    def get_absolute_url(self):
+        return reverse("task_detail", kwargs={"pk": self.pk})
+
     # Create a model for Membership(members)
 class Membership(models.Model):
     id = models.AutoField(primary_key=True)
