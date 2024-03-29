@@ -20,20 +20,21 @@
         <h2>Your Hive:</h2>
         <ul class="hive-list">
             {% for hive in hives %}
-                <li><a href="{% url 'hive_manager:hive_detail' hive.id %}">{{ hive.title }}</a></li>
+                <li><a href="{% url 'hive_detail' hive.id %}">{{ hive.title }}</a></li>
+                {% comment %} <li>{{ hive.title }}</li> {% endcomment %}
             {% empty %}
                 <li>No Hive found</li>
             {% endfor %}
         </ul>
 
-        <h2>Your Tasks:</h2>
+        {% comment %} <h2>Your Tasks:</h2>
         <ul class="task-list">
             {% for task in tasks %}
                 <li><a href="{% url 'hive_manager:task_detail' task.id %}">{{ task.title }}</a></li>
             {% empty %}
                 <li>No tasks found</li>
             {% endfor %}
-        </ul>
+        </ul> {% endcomment %}
 
         <h2>Events:</h2>
         <ul class="event-list">

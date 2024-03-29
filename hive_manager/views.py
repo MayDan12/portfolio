@@ -1,38 +1,101 @@
 # from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 from .models import Hive, Membership, Task, Event
 from .forms import HiveForm, TaskForm
 from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-@login_required
-def hive_list(request):
-    # Query all hives from the database
-    hives = Hive.objects.all()
-    return render(request, 'hive_manager/hive_list.html', {'hives': hives})
 
-@login_required
-def hive_detail(request, hive_id):
 
-        hive = Hive.objects.get(id=hive_id)
-        memberships = Membership.objects.filter(hive=hive)
-        return render(request, 'hive_manager/hive_detail.html', {'hive': hive, 'memberships': memberships})
+class HiveListView(ListView):
+    model = Hive
+    template_name = 'hive_manager/hive_list.html'
+    context_object_name = 'hives'
+    order = ['-StarDate']
 
-@login_required
-def create_hive(request):
-    if request.method == 'POST':
-        form = HiveForm(request.POST)
-        if form.is_valid():
-            hive = form.save(commit=False)
-            hive.queen_bee = request.user
-            hive.save()
+class HiveDetailView(DetailView):
+    model = Hive
+    template_name = 'hive_manager/hive_detail.html'
+    # context_object_name = 'hives'
+    # order = ['-StarDate']
 
-            # Create membership for the Queen Bee
-            Membership.objects.create(User=request.user, hive=hive, role=Membership.QueenBee)
-            return redirect('hive_manager:hive_list')
-    else:
-        form = HiveForm()
-    return render(request, 'hive_manager/create_hive.html', {'form': form})
+class HiveCreateView(LoginRequiredMixin, CreateView):
+    model = Hive
+    fields = ['title', 'description','intendedUsers', 'status', 'StartDate', 'EndDate']
+    template_name = 'hive_manager/create_hive.html'
+    context_object_name = 'hives'
+    # order = ['-StarDate']
+
+    def form_valid(self, form):
+        form.instance.HiveOwner = self.request.user
+        return super().form_valid(form)
+
+class HiveUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Hive
+    fields = ['title', 'description','intendedUsers', 'status', 'StartDate', 'EndDate']
+    template_name = 'hive_manager/update_hive.html'
+    context_object_name = 'hives'
+    # order = ['-StarDate']
+
+    def form_valid(self, form):
+        form.instance.HiveOwner = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        hive = self.get_object()
+        if self.request.user == hive.HiveOwner:
+            return True
+        return False
+
+class HiveDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Hive
+    template_name = 'hive_manager/delete_hive.html'
+    success_url = 'hive_list'
+    # context_object_name = 'hives'
+    # order = ['-StarDate']
+
+    # user passes Test to be able to delete hive
+    def test_func(self):
+        hive = self.get_object()
+        if self.request.user == hive.HiveOwner:
+            return True
+        return False
+
+
+
+
+
+
+# @login_required
+# def hive_list(request):
+#     # Query all hives from the database
+#     hives = Hive.objects.all()
+#     return render(request, 'hive_manager/hive_list.html', {'hives': hives})
+
+# @login_required
+# def hive_detail(request, hive_id):
+
+#         hive = Hive.objects.get(id=hive_id)
+#         memberships = Membership.objects.filter(hive=hive)
+#         return render(request, 'hive_manager/hive_detail.html', {'hive': hive, 'memberships': memberships})
+
+# @login_required
+# def create_hive(request):
+#     if request.method == 'POST':
+#         form = HiveForm(request.POST)
+#         if form.is_valid():
+#             hive = form.save(commit=False)
+#             hive.queen_bee = request.user
+#             hive.save()
+
+#             # Create membership for the Queen Bee
+#             Membership.objects.create(User=request.user, hive=hive, role=Membership.QueenBee)
+#             return redirect('hive_manager:hive_list')
+#     else:
+#         form = HiveForm()
+#     return render(request, 'hive_manager/create_hive.html', {'form': form})
 
 @login_required
 def update_hive(request, hive_id):
@@ -95,7 +158,7 @@ def delete_task(request, task_id):
 
 
 
-@login_required
+
 def dashboard(request):
     # Fetch data from models
     tasks = Task.objects.all()

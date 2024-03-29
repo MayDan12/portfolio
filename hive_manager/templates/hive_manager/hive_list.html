@@ -12,7 +12,8 @@
     <h1>Hive List</h1>
     <ul>
         {% for hive in hives %}
-            <li><a href="{% url 'hive_manager:hive_detail' hive_id=hive.id %}">{{ hive.title }}</a></li>
+            <li><a href="{% url 'hive_detail' hive.id %}">{{ hive.title }}</a></li>
+            {% comment %} <li>>{{ hive.title }}</li> {% endcomment %}
         {% empty %}
             <li>No hives found.</li>
         {% endfor %}

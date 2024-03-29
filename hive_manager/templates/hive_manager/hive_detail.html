@@ -3,16 +3,16 @@
 {% block title %}Hive Detail{% endblock %}
 
 {% block content %}
-    <h1>Hive Detail: {{ hive.title}}</h1>
-    <h2>User: {{ hive.HiveOwner }}</h2>
-    <h2>Description: {{ hive.description }}</h2>
-    <h2>Intended Users: {{hive.intendedUsers}}</h2>
-    <h2>Start-Date: {{hive.StartDate }}</h2>
-    <h2>Deadline: {{hive.EndDate }}</h2>
-    <h2>Status: {{hive.status }}</h2>
+    <h1>Hive Detail: {{ object.title}}</h1>
+    <h2>User: {{ object.HiveOwner }}</h2>
+    <h2>Description: {{ object.description }}</h2>
+    <h2>Intended Users: {{object.intendedUsers}}</h2>
+    <h2>Start-Date: {{object.StartDate }}</h2>
+    <h2>Deadline: {{object.EndDate }}</h2>
+    <h2>Status: {{object.status }}</h2>
     <ul>
         {% for membership in memberships %}
-            <li>{{ hive.HiveOwner }} - {{ membership.role }}</li>
+            <li>{{ object.HiveOwner }} - {{ membership.role }}</li>
         {% endfor %}
     </ul>
 

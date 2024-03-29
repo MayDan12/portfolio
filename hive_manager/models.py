@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.urls import reverse
 
 
 # Create your hive model here.
@@ -23,6 +23,16 @@ class Hive(models.Model):
 
     def __str__(self):
         return str(self.id) + " " + str(self.title)
+
+    def get_absolute_url(self):
+        return reverse("hive_detail", kwargs={"pk": self.pk})
+
+    success_url = 'hive_list'
+
+
+
+
+
 
     # Create a model for Task(assigned)
 class Task(models.Model):
