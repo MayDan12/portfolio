@@ -67,7 +67,9 @@ class Membership(models.Model):
 
 
     def __str__(self):
-        return "{} - {} ({})".format(str(self.User.id), str(self.hive), str(self.role))
+        # return "{} - {} ({})".format(str(self.hive), str(self.role))
+        return "{} - {} ({})".format(str(self.hive), str(self.role), str(self.User))
+
 
 # model for events
 class Event(models.Model):
