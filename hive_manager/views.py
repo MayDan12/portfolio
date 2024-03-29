@@ -9,7 +9,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 
-
+@login_required
 def dashboard(request):
     # Fetch data from models
     tasks = Task.objects.all()
