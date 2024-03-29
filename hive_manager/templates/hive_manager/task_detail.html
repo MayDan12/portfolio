@@ -1,12 +1,13 @@
 {% extends "hive_manager/base.html" %}
+
 {% block content %}
   <article class="media content-section">
     <img class="rounded-circle article-img" src="{{ user.userprofile.profile_picture.url }}">
     <div class="media-body">
       <div class="article-metadata">
-        <a class="mr-2" href="#"> {{ object.assignedTo }}</a>
-        <small class="text-muted">start: {{ object.StartDate|date:"F d, Y" }}</small><br>
-        <small class="text-muted">end: {{ object.EndDate|date:"F d, Y" }}</small>
+        <a class="mr-2" href="#">{{ object.assignedTo }}</a><br>
+        <small class="text-muted">Start: {{ object.StartDate|date:"F d, Y" }}</small><br>
+        <small class="text-muted">End: {{ object.EndDate|date:"F d, Y" }}</small>
         {% if object.assignedTo == user %}
           <div>
             <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'task_update' object.id %}">Update</a>
@@ -14,12 +15,13 @@
           </div>
         {% endif %}
       </div>
-      <h2 class="article-title"> hive: {{ object.hive }}</h2>
-      <h2 class="article-title">task: {{ object.title }}</h2>
-      <p class="article-content">content: {{ object.description}}</p>
+      <h2 class="article-title">Hive: {{ object.hive }}</h2>
+      <h2 class="article-title">Task: {{ object.title }}</h2>
+      <p class="article-content">Content: {{ object.description }}</p>
     </div>
   </article>
 {% endblock content %}
+
 
 
 {% comment %} {% extends 'hive_manager/base.html' %}
