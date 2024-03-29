@@ -1,4 +1,23 @@
-<!-- update_hive.html -->
+{% extends "hive_manager/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">UPDATE TASK</legend>
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Update</button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
+
+
+
+{% comment %} <!-- update_hive.html -->
 
 {% extends 'hive_manager/base.html' %}
 
@@ -11,4 +30,4 @@
         {{ form.as_p }}
         <button type="submit">Update Task</button>
     </form>
-{% endblock content %}
+{% endblock content %} {% endcomment %}

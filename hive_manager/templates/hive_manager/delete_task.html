@@ -1,4 +1,24 @@
-{% extends 'hive_manager/base.html' %}
+{% extends "hive_manager/base.html" %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Delete Task</legend>
+                <h2>Are you sure you want to delete the Task "{{ object.title }}"</h2>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-danger" type="submit">Yes, Delete</button>
+                <a class="btn btn-outline-secondary" href="{% url 'task_detail' object.id %}">Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
+
+
+
+
+{% comment %} {% extends 'hive_manager/base.html' %}
 
 {% block title %}Delete Task{% endblock title %}
 
@@ -12,4 +32,4 @@
         <!--Take me back to delete page-->
         <a href="{% url 'task_detail' object.id %}">Cancel</a>
     </form>
-{% endblock content %}
+{% endblock content %} {% endcomment %}

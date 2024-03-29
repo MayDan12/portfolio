@@ -40,7 +40,9 @@
         <ul class="event-list">
             {% for event in events %}
                 <li>{{ event.title }}</li>
+                <p> start-time</p>
                 <li>{{ event.start_time }}</li>
+                <p> end-time</p>
                 <li>{{ event.end_time }}</li>
             {% empty %}
                 <li>No Events yet</li>
@@ -50,7 +52,7 @@
         <h2>Membership:</h2>
         <ul class="membership-list">
             {% for membership in memberships %}
-                <li>{{ membership.hive }}</li>
+                <li>{{ membership.User }} - {{ membership.hive }} - {{ membership.role }}</li>
             {% empty %}
                 <li>No membership</li>
             {% endfor %}

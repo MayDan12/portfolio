@@ -1,4 +1,25 @@
-<!-- hive_list.html -->
+{% extends "hive_manager/base.html" %}
+
+{% block content %}
+    {% for task in tasks %}
+        <article class="media content-section">
+            <img class="rounded-circle article-img" src="{{ user.userprofile.profile_picture.url }}">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <a class="mr-2" href="#">{{ task.assignedTo }}</a>
+                    <small class="text-muted">{{ task.StartDate|date:"F d, Y" }} - {{ hive.EndDate|date:"F d, Y" }}</small>
+                </div>
+                <h2><a class="article-title" href="{% url 'task_detail' task.id %}">{{ task.title }}</a></h2>
+                <p class="article-content">{{ task.description }}</p>
+                {% comment %} <p class="article-status">Status: {{ task.status }}</p> {% endcomment %}
+            </div>
+        </article>
+    {% endfor %}
+{% endblock content %}
+
+
+
+{% comment %} <!-- hive_list.html -->
 {% extends 'hive_manager/base.html' %}
 <!DOCTYPE html>
 <html lang="en">
@@ -14,10 +35,10 @@
         {% for task in tasks %}
             <li><a href="{% url 'task_detail' task.id %}">{{ task.title }}</a></li>
             {% comment %} <li>>{{ task.title }}</li> {% endcomment %}
-        {% empty %}
+        {% comment %} {% empty %}
             <li>No Task found.</li>
         {% endfor %}
     </ul>
     {% endblock content %}
 </body>
-</html>
+</html> {% endcomment %}

@@ -1,4 +1,25 @@
-<!-- hive_list.html -->
+{% extends "hive_manager/base.html" %}
+
+{% block content %}
+    {% for hive in hives %}
+        <article class="media content-section">
+            <img class="rounded-circle article-img" src="{{ user.userprofile.profile_picture.url }}">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <a class="mr-2" href="#">{{ hive.HiveOwner }}</a>
+                    <small class="text-muted">{{ hive.StartDate|date:"F d, Y" }} - {{ hive.EndDate|date:"F d, Y" }}</small>
+                </div>
+                <h2><a class="article-title" href="{% url 'hive_detail' hive.id %}">{{ hive.title }}</a></h2>
+                <p class="article-content">{{ hive.description }}</p>
+                <p class="article-status">Status: {{ hive.status }}</p>
+            </div>
+        </article>
+    {% endfor %}
+{% endblock content %}
+
+
+
+{% comment %} <!-- hive_list.html -->
 {% extends 'hive_manager/base.html' %}
 <!DOCTYPE html>
 <html lang="en">
@@ -14,10 +35,11 @@
         {% for hive in hives %}
             <li><a href="{% url 'hive_detail' hive.id %}">{{ hive.title }}</a></li>
             {% comment %} <li>>{{ hive.title }}</li> {% endcomment %}
-        {% empty %}
+        {% comment %} {% empty %}
             <li>No hives found.</li>
         {% endfor %}
     </ul>
     {% endblock content %}
 </body>
-</html>
+</html> {% endcomment %}
+
