@@ -24,6 +24,7 @@ def dashboard(request):
     return render(request, 'hive_manager/dashboard.html', context)
 
 
+# view Hive manager
 class HiveListView(ListView):
     model = Hive
     template_name = 'hive_manager/hive_list.html'
@@ -136,6 +137,10 @@ class TaskDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         return False
 
+
+
+# view membership for CRUD
+# code goes here
 
 
 
