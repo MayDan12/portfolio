@@ -4,9 +4,26 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 from .models import Hive, Membership, Task, Event
 from .forms import HiveForm, TaskForm
+from django.urls import reverse_lazy
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
+
+
+def dashboard(request):
+    # Fetch data from models
+    tasks = Task.objects.all()
+    hives = Hive.objects.all()
+    memberships = Membership.objects.all()
+    events = Event.objects.all()  # Query all events from the database
+
+    context = {
+        'tasks': tasks,
+        'hives': hives,
+        'memberships': memberships,
+        'events': events
+    }
+    return render(request, 'hive_manager/dashboard.html', context)
 
 
 class HiveListView(ListView):
@@ -52,7 +69,7 @@ class HiveUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 class HiveDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Hive
     template_name = 'hive_manager/delete_hive.html'
-    success_url = 'hive_list'
+    success_url = reverse_lazy('dashboard')
     # context_object_name = 'hives'
     # order = ['-StarDate']
 
@@ -97,26 +114,26 @@ class HiveDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 #         form = HiveForm()
 #     return render(request, 'hive_manager/create_hive.html', {'form': form})
 
-@login_required
-def update_hive(request, hive_id):
-    hive = get_object_or_404(Hive, id=hive_id)
-    if request.method == 'POST':
-        form = HiveForm(request.POST, instance=hive)
-        if form.is_valid():
-            form.save()
-            return redirect('hive_manager:hive_detail', hive_id=hive_id)  # Redirect to Hive detail page
-    else:
-        form = HiveForm(instance=hive)
-    return render(request, 'hive_manager/update_hive.html', {'form': form, 'hive': hive})
+# @login_required
+# def update_hive(request, hive_id):
+#     hive = get_object_or_404(Hive, id=hive_id)
+#     if request.method == 'POST':
+#         form = HiveForm(request.POST, instance=hive)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('hive_manager:hive_detail', hive_id=hive_id)  # Redirect to Hive detail page
+#     else:
+#         form = HiveForm(instance=hive)
+#     return render(request, 'hive_manager/update_hive.html', {'form': form, 'hive': hive})
 
-@login_required
-def delete_hive(request, hive_id):
-    hive = get_object_or_404(Hive, id=hive_id)
-    if request.method == 'POST':
-        hive.delete()
-        return redirect('hive_manager:hive_list')  # Redirect to Hive list page
-    else:
-        return render(request, 'hive_manager/delete_hive.html', {'hive': hive}) # return redirect('hive_list')
+# @login_required
+# def delete_hive(request, hive_id):
+#     hive = get_object_or_404(Hive, id=hive_id)
+#     if request.method == 'POST':
+#         hive.delete()
+#         return redirect('hive_manager:hive_list')  # Redirect to Hive list page
+#     else:
+#         return render(request, 'hive_manager/delete_hive.html', {'hive': hive}) # return redirect('hive_list')
 
 
 # views for creating task
@@ -159,18 +176,4 @@ def delete_task(request, task_id):
 
 
 
-def dashboard(request):
-    # Fetch data from models
-    tasks = Task.objects.all()
-    hives = Hive.objects.all()
-    memberships = Membership.objects.all()
-    events = Event.objects.all()  # Query all events from the database
-
-    context = {
-        'tasks': tasks,
-        'hives': hives,
-        'memberships': memberships,
-        'events': events
-    }
-    return render(request, 'hive_manager/dashboard.html', context)
 

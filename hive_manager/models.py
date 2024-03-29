@@ -27,7 +27,7 @@ class Hive(models.Model):
     def get_absolute_url(self):
         return reverse("hive_detail", kwargs={"pk": self.pk})
 
-    success_url = 'hive_list'
+
 
 
 
