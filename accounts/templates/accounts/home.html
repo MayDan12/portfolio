@@ -1,267 +1,96 @@
+<!-- base.html -->
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>InHive - Home</title>
-    <!-- Add your stylesheets, scripts, and other meta tags here -->
-    <link rel="stylesheet" type="text/css" href="{% static 'accounts/home.css' %}">
-    {% comment %} <link rel="stylesheet" href="accounts/styl/style.css" /> {% endcomment %}
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<html>
+<head>
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0"
-    />
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
-    ></script>
-  </head>
-  <body>
-    <header>
-      <!-- Navigation bar, logo, and other header elements go here -->
-      <nav class="navbar">
-        <div class="containers">
-          <div class="navbar-header">
-            <button class="navbar-toggler" data-toggle="open-navbar1">
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-            </button>
-            <a href="#">
-              <h1>IN<span>HIVE</span></h1>
-            </a>
-          </div>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-          <div class="navbar-menu" id="open-navbar1">
-            <ul class="navbar-nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li class="navbar-dropdown">
-                <a
-                  href="#"
-                  class="dropdown-toggler"
-                  data-dropdown="my-dropdown-id"
-                >
-                  Features <i class="fa fa-angle-down"></i>
-                </a>
-                <ul class="dropdown" id="my-dropdown-id">
-                  <li><a href="#">Category 1</a></li>
-                  <li class="separator"></li>
-                  <li><a href="#">Category 2</a></li>
-                  <li class="separator"></li>
-                  <li><a href="#">Category 3</a></li>
-                </ul>
-              </li>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-              <li><a href="#">Products</a></li>
-              <li><a href="#">Solution</a></li>
-              <li><a href="#">Contact</a></li>
-              <li><a href="#" class="navbtn">Sign in</a></li>
-            </ul>
+    <!-- Calender integrations -->
+    <link href='https://unpkg.com/fullcalendar/main.min.css' rel='stylesheet' />
+    <script src='https://unpkg.com/fullcalendar/main.min.js'></script>
+    <script src='https://unpkg.com/@fullcalendar/daygrid/main.min.js'></script>
+    <script src='https://unpkg.com/@fullcalendar/timegrid/main.min.js'></script>
+    <script src='https://unpkg.com/@fullcalendar/interaction/main.min.js'></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/main.css' %}">
+
+    {% if title %}
+        <title>The InHive - {{ title }}</title>
+    {% else %}
+        <title>InHive</title>
+    {% endif %}
+</head>
+<body>
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4" href="{% url 'home' %}">Home</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+              <a class="nav-item nav-link" href="{% url 'contact' %}">contact</a>
+              <a class="nav-item nav-link" href="{% url 'about' %}">About</a>
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+            {% if user.is_authenticated %}
+            <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
+                <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+            {% else %}
+                <a class="nav-item nav-link" href="{% url 'register' %}">Signup</a>
+                <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+            {% endif %}
+            </div>
           </div>
         </div>
       </nav>
     </header>
-    <!-- <div class="container"> -->
-    <section id="home_section " class="margin container">
-      <div class="grid-2-cols">
-        <div class="home_info">
-          <h1 class="primary_heading">Welcome to InHive</h1>
-          <p class="primary_text">
-            Revolutionize your experience <br />
-            seamless planning, collaboration, <br />and productivity in one
-            dynamic platform!
-          </p>
-          <p class="secondary_text">
-            Revolutionizing Task Management Experience
-          </p>
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col-md-8">
+            {% block main %}
+                <!-- This block will be overridden by child templates -->
+            {% endblock main %}
 
-          <div class="butts">
-            <button type="submit" class="btn" id="signup">Get Started</button>
-            <button type="submit" class="btns">Learn More</button>
-          </div>
+
+        {% block content %}
+        {% endblock content %}
         </div>
-        <div>
-          <img class="img_illu" src="Assets/img/hmm.png" alt="" />
-        </div>
-      </div>
-    </section>
-
-    <section id="features" class="container">
-      <div class="features">
-        <h2 class="align">Key Features</h2>
-        <!-- List key features here -->
-
-        <div class="flex_box">
-          <div class="feature_box">
-            <div>
-              <ion-icon class="ion_icon" name="create-sharp"></ion-icon>
-              <h3>Hive Creation</h3>
-              <p>
-                Users can create their own Hives, assuming the role of the Queen
-                Bee with administrative privileges.
-              </p>
-            </div>
-          </div>
-          <div class="feature_box">
-            <div>
-              <ion-icon class="ion_icon" name="chatbubbles-sharp"></ion-icon>
-              <h3>Role-Based Collaboration</h3>
-              <p>
-                Admins (Queen Bee), Moderators (Soldiers), and Members (Workers)
-                collaborate efficiently with assigned roles.
-              </p>
-            </div>
-          </div>
-          <div class="feature_box">
-            <div>
-              <ion-icon class="ion_icon" name="checkbox-sharp"></ion-icon>
-              <h3>Task and Time Management</h3>
-              <p>
-                Assign tasks with clear deadlines, integrated calendar, and
-                real-time notifications.
-              </p>
-            </div>
-          </div>
-          <div class="feature_box">
-            <div>
-              <ion-icon class="ion_icon" name="stats-chart-sharp"></ion-icon>
-              <h3>Productivity Analytics</h3>
-              <p>
-                Evaluate Hive productivity and track individual performance with
-                analytics.
-              </p>
-            </div>
-          </div>
-          <div class="feature_box">
-            <div>
-              <ion-icon class="ion_icon" name="apps-sharp"></ion-icon>
-              <h3>Multiple Hives</h3>
-              <p>
-                Create and manage multiple Hives for different courses or
-                projects independently.
-              </p>
-            </div>
-          </div>
-          <div class="feature_box">
-            <div>
-              <ion-icon class="ion_icon" name="people-sharp"></ion-icon>
-              <h3>User-Friendly Interface</h3>
-              <p>
-                Intuitive design for a seamless user experience with easy
-                navigation to access different Hives, tasks, and collaborative
-                spaces.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="hiveCreation" class="container explain">
-      <h2>Hive Creation</h2>
-      <!-- Details about Hive creation feature -->
-      <p>
-        Users can create their own Hives, assuming the role of the Queen Bee
-        with administrative privileges.
-      </p>
-    </section>
-
-    <section id="roleBasedCollaboration" class="container explain">
-      <h2>Role-Based Collaboration</h2>
-      <!-- Details about role-based collaboration feature -->
-      <p>
-        Admins (Queen Bee), Moderators (Soldiers), and Members (Workers)
-        collaborate efficiently with assigned roles.
-      </p>
-    </section>
-
-    <!-- Repeat similar sections for other key features -->
-
-    <section id="userFriendlyInterface" class="container explain">
-      <h2>User-Friendly Interface</h2>
-      <!-- Details about the user-friendly interface -->
-      <p>
-        Intuitive design for a seamless user experience with easy navigation to
-        access different Hives, tasks, and collaborative spaces.
-      </p>
-    </section>
-
-    <footer>
-      <div class="container">
-        <!-- Footer content, links, and other elements go here -->
-        <div class="footer">
-          <div class="footer_logo">
-            <h1>IN<span>HIVE</span></h1>
-            <p>
-              Revolutionize your experience seamless planning, collaboration,
-              and productivity in one dynamic platform!
+        <div class="col-md-4">
+          <div class="content-section">
+            <h3>The InHive</h3>
+            <p class='text-muted'>Explore the adventures of the Hive.
+              <ul class="list-group">
+                <li class="list-group-item list-group-item-light">Latest Posts</li>
+                <li class="list-group-item list-group-item-light">Announcements</li>
+                <li class="list-group-item list-group-item-light">Calendars</li>
+                <li class="list-group-item list-group-item-light">Quotes</li>
+              </ul>
             </p>
           </div>
-          <div class="box">
-            <div class="footer_links">
-              <h4>Quick Links</h4>
-              <a href="#">Home</a>
-              <a href="#">Features</a>
-              <a href="#">Products</a>
-              <a href="#">Solutions</a>
-              <a href="#">Contact</a>
-            </div>
-            <div class="foot-contact">
-              <h4>Contact Us</h4>
-              <ul>
-                <li>
-                  <span>Email:</span> <br />
-                  example@example.com
-                </li>
-                <li>
-                  <span>Phone:</span> <br />
-                  +1234567890
-                </li>
-                <li>
-                  <span>Address:</span> <br />
-                  123 Street, City, Country
-                </li>
-              </ul>
-            </div>
-            <div class="footer_links social">
-              <h4>Social Links</h4>
-              <a href="#"
-                ><ion-icon class="soc_icon" name="logo-twitter"></ion-icon
-              ></a>
-              <a href="#"
-                ><ion-icon class="soc_icon" name="logo-instagram"></ion-icon
-              ></a>
-              <a href="#"
-                ><ion-icon class="soc_icon" name="logo-github"></ion-icon
-              ></a>
-              <!-- <a href="#">Solutions</a>
-                  <a href="#">Contact</a> -->
-            </div>
-          </div>
         </div>
-        <p class="align bottom">&copy; 2024 InHive. All rights reserved.</p>
       </div>
-    </footer>
-    <!-- </div> -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="script.js"></script>
-    <script src="main.js"></script>
-  </body>
+    </main>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
 </html>
 
+<footer>
+    <!-- Add footer content here -->
+    <p>&copy; 2024 The InHive. All rights reserved.</p>
+</footer>
 
 
 
@@ -269,33 +98,64 @@
 
 
 
+{% comment %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Django App{% endblock title %}</title>
+
+    <!-- Add your CSS stylesheets or links here -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to InHive</h1>
+        <!-- Add navigation links or menus here -->
+        <nav>
+            <ul>
+                {% comment %} <li><a href="{% url 'home' %}">Home</a></li> {% endcomment %}
+                {% comment %} <li><a href="{% url 'register' %}">Sign-up</a></li> {% endcomment %}
+                {% comment %} <li><a href="{% url 'login' %}">Login</a></li> {% endcomment %}
+                {% comment %} <li><a href="{% url 'contact' %}">contact</a></li> {% endcomment %}
+                <!-- Add more navigation links as needed -->
+            {% comment %} </ul>
+        </nav>
+    </header>
+
+    {% block main %}
+        <!-- This block will be overridden by child templates -->
+    {% endblock main %}
 
 
+    {% block content %}
+        <!-- This block will be overridden by child templates -->
+    {% endblock content %}
+
+    <footer>
+        <!-- Add footer content here -->
+        <p>&copy; 2024 The InHive. All rights reserved.</p>
+    </footer>
+
+    <!-- Add your JavaScript files or links here -->
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html> {% endcomment %}
 
 
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Add your CSS and JavaScript links here -->
+</head>
+<body>
 
+    {% block content %}
+    {% endblock content %}
 
-
-
-{% comment %} {% extends 'accounts/base.html' %}
-
-{% block main %}
-
-<main>
-    <section>
-        <h2>About Our Company</h2>
-        <p>
-            Welcome to our InHive website. We specialize in ... (add your content
-            here).
-        </p>
-    </section>
-
-    <section>
-        <h2>Our Services</h2>
-        <p>
-            Learn more about the services we offer... (add your content here).
-        </p>
-    </section>
-</main>
-
-{% endblock main %} {% endcomment %}
+</body>
+</html> {% endcomment %}
