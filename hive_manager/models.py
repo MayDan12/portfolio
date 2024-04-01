@@ -52,8 +52,8 @@ class Task(models.Model):
 
     # Create a model for Membership(members)
 class Membership(models.Model):
-    id = models.AutoField(primary_key=True)
-    User = models.ForeignKey(User, on_delete=models.CASCADE)
+    # id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     hive = models.ForeignKey('Hive', on_delete=models.CASCADE)
     roleChoices = [
         ('Member', 'Member'),
@@ -68,7 +68,7 @@ class Membership(models.Model):
 
     def __str__(self):
         # return "{} - {} ({})".format(str(self.hive), str(self.role))
-        return "{} - {} ({})".format(str(self.hive), str(self.role), str(self.User))
+        return "{} - {} ({})".format(str(self.hive), str(self.role), str(self.user))
 
 
 # model for events
