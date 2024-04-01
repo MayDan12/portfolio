@@ -4,7 +4,7 @@
     <img class="rounded-circle article-img" src="{{ user.userprofile.profile_picture.url }}">
     <div class="media-body">
       <div class="article-metadata">
-        <a class="mr-2" href="#"> {{ object.HiveOwner }}</a>
+        <a class="mr-2" href="{% url 'user_hive_list' object.HiveOwner.username %}"> {{ object.HiveOwner }}</a>
         <h2 class="article-title"> title: {{ object.title }}</h2>
         <small class="text-muted">start: {{ object.StartDate|date:"F d, Y" }}</small><br>
         <small class="text-muted">end: {{ object.EndDate|date:"F d, Y" }}</small>

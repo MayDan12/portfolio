@@ -1,12 +1,13 @@
 {% extends "hive_manager/base.html" %}
 
 {% block content %}
+    <h1 class="mb-3">Hives By {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h1>
     {% for hive in hives %}
         <article class="media content-section">
             <img class="rounded-circle article-img" src="{{ user.userprofile.profile_picture.url }}">
             <div class="media-body">
                 <div class="article-metadata">
-                    <a class="mr-2" href="{% url 'user_hive_list' hive.HiveOwner.username %}">{{ hive.HiveOwner }}</a>
+                    <a class="mr-2" href="{% url 'user_hive_list' hive.HiveOwner.username %}"></a>
                     <small class="text-muted">{{ hive.StartDate|date:"F d, Y" }} - {{ hive.EndDate|date:"F d, Y" }}</small>
                 </div>
                 <h2><a class="article-title" href="{% url 'hive_detail' hive.id %}">{{ hive.title }}</a></h2>
@@ -47,30 +48,3 @@
 {% endif %}
 
 {% endblock content %}
-
-
-
-{% comment %} <!-- hive_list.html -->
-{% extends 'hive_manager/base.html' %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% block title %}Hive List {% endblock title %}
-</head>
-<body>
-    {% block content %}
-    <h1>Hive List</h1>
-    <ul>
-        {% for hive in hives %}
-            <li><a href="{% url 'hive_detail' hive.id %}">{{ hive.title }}</a></li>
-            {% comment %} <li>>{{ hive.title }}</li> {% endcomment %}
-        {% comment %} {% empty %}
-            <li>No hives found.</li>
-        {% endfor %}
-    </ul>
-    {% endblock content %}
-</body>
-</html> {% endcomment %}
-

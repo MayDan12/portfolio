@@ -8,7 +8,7 @@ from .views import (HiveListView,
                     HiveDeleteView,
                     TaskListView,
                     TaskDetailView,
-                    TaskCreateView, TaskUpdateView, TaskDeleteView)
+                    TaskCreateView, TaskUpdateView, TaskDeleteView, UserHiveListView)
 
 
 # app_name = 'hive_manager'
@@ -19,6 +19,7 @@ urlpatterns = [
     path('hive_detail/<int:pk>', HiveDetailView.as_view(), name='hive_detail'),
     path('hive_update/<int:pk>', HiveUpdateView.as_view(), name='hive_update'),
     path('hive_delete/<int:pk>', HiveDeleteView.as_view(), name='hive_delete'),
+    path('user_hive_list/<str:username>', UserHiveListView.as_view(), name='user_hive_list'),
     path('dashboard/', views.dashboard, name='dashboard'),
     # path('create_hive/', views.create_hive, name='create_hive'),
     # path('update_hive/<int:hive_id>', views.update_hive, name='update_hive'),

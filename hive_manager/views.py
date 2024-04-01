@@ -3,7 +3,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 from .models import Hive, Membership, Task, Event
 from django.urls import reverse_lazy
-from django.shortcuts import render
+from django.contrib.auth.models import User
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 
@@ -30,6 +31,18 @@ class HiveListView(ListView):
     template_name = 'hive_manager/hive_list.html'
     context_object_name = 'hives'
     order = ['-StarDate']
+    paginate_by = 2
+
+
+class UserHiveListView(ListView):
+    model = Hive
+    template_name = 'hive_manager/user_hive_list.html'
+    context_object_name = 'hives'
+    paginate_by = 2
+
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Hive.objects.filter(HiveOwner=user).order_by('-StartDate')
 
 class HiveDetailView(DetailView):
     model = Hive
