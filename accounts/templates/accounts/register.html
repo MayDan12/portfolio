@@ -1,33 +1,122 @@
-{% extends "accounts/base.html" %}
-{% load crispy_forms_tags %}
-{% block content %}
-    <div class="content-section">
-        <form method="POST">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Join Today</legend>
-                {{ form|crispy }}
-            </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Sign Up</button>
-            </div>
-        </form>
-        <div class="border-top pt-3">
-            <small class="text-muted">
-                Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
-            </small>
+{% load static %} {% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>InHive - Register</title>
+    <!-- Add your stylesheets, scripts, and other meta tags here -->
+    <link rel="stylesheet" href="{%static 'accounts/styles/register.css' %}" />
+    <link rel="stylesheet" href="{%static 'accounts/styles/home.css' %}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+  </head>
+  <body>
+    <header>
+      <!-- Navigation bar, logo, and other header elements go here -->
+      <nav class="navbar">
+        <div class="containers">
+          <div class="navbar-header">
+            <button class="navbar-toggler" data-toggle="open-navbar1">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+            <a href="#">
+              <h1>IN<span>HIVE</span></h1>
+            </a>
+          </div>
+
+          <div class="navbar-menu" id="open-navbar1">
+            <ul class="navbar-nav">
+              <li class="active"><a href="#">Home</a></li>
+
+              <li><a href="#">Contact</a></li>
+              <li><a href="login" class="navbtn">Sign in</a></li>
+            </ul>
+          </div>
         </div>
+      </nav>
+    </header>
+
+    <div class="form">
+      <div class="tab-group">
+        <div style="border-radius: 15px !important; margin-right: 8x">
+          <h1>Sign Up</h1>
+        </div>
+      </div>
+      <div id="signup">
+        <h2>Welcome To INHIVE!</h2>
+        <form action="" method="post">
+          {% csrf_token %} {{ form|crispy }}
+          <div class="top-row">
+            <!-- <div class="field-wrap">
+              <input
+                type="text"
+                name="first_name"
+                required
+                placeholder="First Name"
+              />
+            </div>
+            <div class="field-wrap">
+              <input
+                type="text"
+                name="last_name"
+                required
+                placeholder="Last Name"
+              />
+            </div>
+          </div>
+          <div class="field-wrap">
+            <input
+              type="email"
+              name="email"
+              required
+              placeholder="Email Address"
+            />
+          </div>
+          <div class="field-wrap">
+            <input
+              type="password"
+              name="password1"
+              required
+              placeholder="Password"
+            />
+          </div>
+          <div class="field-wrap">
+            <input
+              type="password"
+              name="password2"
+              required
+              placeholder="Confirm Password"
+            /> -->
+          </div>
+          <button type="submit" class="button button-block">Sign Up</button>
+        </form>
+        <p class="align log">
+          Have an account? <span><a href="login">Log In</a></span>
+        </p>
+      </div>
     </div>
-{% endblock content %}
-
-
-{% comment %} {% extends 'accounts/base.html' %}
-{% block content %}
-  <h2>Register</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Register</button>
-  </form>
-{% endblock content %} {% endcomment %}
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </body>
+</html>

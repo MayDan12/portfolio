@@ -1,5 +1,4 @@
-{% load static %}
-{% load crispy_forms_tags %}
+{% load static %} {% load crispy_forms_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,11 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>InHive - Home</title>
     <!-- Add your stylesheets, scripts, and other meta tags here -->
-    <link rel="stylesheet" type="text/css" href="{% static 'accounts/styles/register.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'accounts/styles/home.css' %}">
-    {% comment %} <link rel="stylesheet" href="accounts/styles/register.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'accounts/styles/register.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'accounts/styles/home.css' %}"
+    />
+    {% comment %}
+    <link rel="stylesheet" href="accounts/styles/register.css" />
     <link rel="stylesheet" href="accounts/styles/home.css" />
-    <link rel="stylesheet" href="styl.css" /> {% endcomment %}
+    <link rel="stylesheet" href="styl.css" />
+    {% endcomment %}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
@@ -33,7 +42,6 @@
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
     ></script>
   </head>
-
 
   <body>
     <header>
@@ -73,9 +81,8 @@
         <h2>Ready to get back in the Hive <br />Welcome Back!</h2>
 
         <form action="" method="post">
-          {% csrf_token %}
-          {{ form|crispy }}
-          {% comment %} <div class="field-wrap">
+          {% csrf_token %} {{ form|crispy }}
+          <!-- {% comment %} <div class="field-wrap">
             <input type="text" name="username" required placeholder="Email" />
           </div>
           <div class="field-wrap">
@@ -85,7 +92,7 @@
               required
               placeholder="Password"
             />
-          </div> {% endcomment %}
+          </div> {% endcomment %} -->
           <p class="forgot">
             <a href="">Forgot Password?</a>
           </p>
