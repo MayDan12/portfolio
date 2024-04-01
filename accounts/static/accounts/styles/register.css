@@ -1,0 +1,145 @@
+@import url(https://fonts.googleapis.com/css?family=Poppins:300);
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  height: 100vh;
+  /* background: #01939c; */
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.dev/svgjs' width='1440' height='560' preserveAspectRatio='none' viewBox='0 0 1440 560'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1605%26quot%3b)' fill='none'%3e%3crect width='1440' height='560' x='0' y='0' fill='url(%26quot%3b%23SvgjsLinearGradient1606%26quot%3b)'%3e%3c/rect%3e%3cpath d='M916.6 597.82C1019.02 542.6 972.67 200.63 1157.76 199.73 1342.86 198.83 1505.48 433.96 1640.09 440.53' stroke='rgba(255%2c 255%2c 255%2c 0)' stroke-width='2'%3e%3c/path%3e%3cpath d='M843.06 643.31C971.88 610.41 1020.78 260.22 1210.39 258.72 1400 257.22 1473.81 448.72 1577.72 454.72' stroke='rgba(255%2c 255%2c 255%2c 0)' stroke-width='2'%3e%3c/path%3e%3cpath d='M291.44 614.43C484.03 604.86 615.22 275.02 980.54 267.95 1345.86 260.88 1493.85 128.66 1669.64 127.95' stroke='rgba(255%2c 255%2c 255%2c 0)' stroke-width='2'%3e%3c/path%3e%3cpath d='M354.06 576.51C519.48 571.8 636.14 336.61 967.22 327.05 1298.31 317.49 1414.73 79.9 1580.39 75.05' stroke='rgba(255%2c 255%2c 255%2c 0)' stroke-width='2'%3e%3c/path%3e%3cpath d='M609.64 610.72C696.18 603.21 660.76 435.3 903.63 425.49 1146.51 415.68 1334.36 205.24 1491.62 201.49' stroke='rgba(255%2c 255%2c 255%2c 0)' stroke-width='2'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1605'%3e%3crect width='1440' height='560' fill='white'%3e%3c/rect%3e%3c/mask%3e%3clinearGradient x1='50%25' y1='100%25' x2='50%25' y2='0%25' gradientUnits='userSpaceOnUse' id='SvgjsLinearGradient1606'%3e%3cstop stop-color='rgba(0%2c 0%2c 0%2c 1)' offset='0'%3e%3c/stop%3e%3cstop stop-color='rgba(24%2c 0%2c 0%2c 1)' offset='1'%3e%3c/stop%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e");
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow-y: hidden !important;
+  font-family: "Poppins", sans-serif;
+}
+
+/* NavBar */
+.navbar .navbar-menu .navbar-nav {
+  font-size: 1rem;
+}
+/* Navbar */
+
+a {
+  text-decoration: none;
+  color: #ff9f0e;
+  transition: 0.5s ease;
+}
+a:hover {
+  color: #179b77;
+}
+.form {
+  background: #ffffff;
+  padding: 40px;
+  padding-top: 20px;
+  max-width: 500px;
+  margin: 30px auto;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px 4px rgba(95, 38, 4, 0.3);
+  color: #ff9f0e;
+}
+
+.tab-group {
+  text-decoration: none;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  width: 40%;
+  text-align: center;
+  background: #ff9f0e;
+  color: #fff;
+  border-radius: 15px !important;
+  margin: auto;
+}
+
+.tab-content > div:last-child {
+  display: none;
+}
+
+h2 {
+  text-align: center;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0.5rem 0 20px;
+}
+
+.text p {
+  text-align: center;
+
+  font-weight: 500;
+}
+
+input,
+textarea {
+  font-size: 17px;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 10px 10px;
+  background: none;
+  background-image: none;
+  border: 1px solid#ff9f0e;
+  color: #000000;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+textarea {
+  border: 2px solid #ff9f0e;
+  resize: vertical;
+}
+.field-wrap {
+  position: relative;
+  margin-bottom: 20px;
+}
+.top-row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.top-row > div {
+  float: left;
+  width: 48%;
+  margin-right: 4%;
+}
+.top-row > div:last-child {
+  margin: 0;
+}
+.button {
+  border: 0;
+  outline: none;
+  border-radius: 15px;
+  padding: 15px 0;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  background: #ff9f0e;
+  cursor: pointer;
+  color: #fff;
+  transition: all 0.5s ease;
+  -webkit-appearance: none;
+}
+.button:hover,
+.button:focus {
+  background: #af6a03;
+}
+.button-block {
+  display: block;
+  width: 100%;
+}
+
+.forgot {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  text-align: right;
+}
+
+.log {
+  margin-top: 0.4rem;
+  font-weight: 500;
+}
+
+.log span {
+  cursor: pointer;
+}
