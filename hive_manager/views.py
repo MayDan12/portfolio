@@ -26,7 +26,8 @@ def dashboard(request):
 
 
 # view Hive manager
-class HiveListView(ListView):
+
+class HiveListView(LoginRequiredMixin, ListView):
     model = Hive
     template_name = 'hive_manager/hive_list.html'
     context_object_name = 'hives'
@@ -34,7 +35,8 @@ class HiveListView(ListView):
     paginate_by = 2
 
 
-class UserHiveListView(ListView):
+
+class UserHiveListView(LoginRequiredMixin, ListView):
     model = Hive
     template_name = 'hive_manager/user_hive_list.html'
     context_object_name = 'hives'
@@ -44,7 +46,8 @@ class UserHiveListView(ListView):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
         return Hive.objects.filter(HiveOwner=user).order_by('-StartDate')
 
-class HiveDetailView(DetailView):
+
+class HiveDetailView(LoginRequiredMixin, DetailView):
     model = Hive
     template_name = 'hive_manager/hive_detail.html'
     # context_object_name = 'hives'
@@ -96,13 +99,15 @@ class HiveDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 
 # View Task manager
-class TaskListView(ListView):
+
+class TaskListView(LoginRequiredMixin, ListView):
     model = Task
     template_name = 'hive_manager/task_list.html'
     context_object_name = 'tasks'
     order = ['-StarDate']
 
-class TaskDetailView(DetailView):
+
+class TaskDetailView(LoginRequiredMixin, DetailView):
     model = Task
     template_name = 'hive_manager/task_detail.html'
     # context_object_name = 'tasks'

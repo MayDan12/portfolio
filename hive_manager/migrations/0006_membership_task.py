@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='membership',
             name='task',
-            field=models.ForeignKey(default='QueenBee', on_delete=django.db.models.deletion.CASCADE, to='hive_manager.task'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='hive_manager.task'),
         ),
     ]
