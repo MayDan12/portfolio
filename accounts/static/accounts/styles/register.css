@@ -7,6 +7,9 @@
   padding: 0;
 }
 
+label {
+  color: #000000;
+}
 
 /* NavBar */
 .navbar .navbar-menu .navbar-nav {
