@@ -24,7 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-73)#*6cz=xm2%a&*hr$z9g(%ryjptc^v)td75w43yp**bmjv6v'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -85,10 +87,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'postgres',
-        'USER': 'postgres.lkoqmnfdzcistateomnh',
-        'HOST': 'aws-0-us-east-1.pooler.supabase.com',
+        'USER': os.environ.get('DB_USER'),
+        'HOST': os.environ.get('DB_HOST'),
         'PORT': '5432',
-        'PASSWORD': 'Whatismaths101'
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
     }
 }
 
@@ -144,3 +146,6 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
 
 # LOGOUT_REDIRECT_URL = 'logout'
+
+MY_GMAIL = os.environ.get('MY_GMAIL')
+MY_GMAIL_PASSWORD = os.environ.get('MY_GMAIL_PASSWORD')
