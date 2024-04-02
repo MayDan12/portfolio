@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+SECRET_KEY = 'django-insecure-73)#*6cz=xm2%a&*hr$z9g(%ryjptc^v)td75w43yp**bmjv6v'
 
 
 
@@ -87,10 +87,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'postgres',
-        'USER': os.environ.get('DB_USER'),
-        'HOST': os.environ.get('DB_HOST'),
+        'USER': 'postgres.lkoqmnfdzcistateomnh',
+        'HOST': 'aws-0-us-east-1.pooler.supabase.com',
         'PORT': '5432',
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'PASSWORD': 'Whatismaths101',
     }
 }
 
@@ -147,5 +147,17 @@ LOGIN_REDIRECT_URL = 'home'
 
 # LOGOUT_REDIRECT_URL = 'logout'
 
-MY_GMAIL = os.environ.get('MY_GMAIL')
-MY_GMAIL_PASSWORD = os.environ.get('MY_GMAIL_PASSWORD')
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ.get('MY_GMAIL')
+EMAIL_HOST_PASSWORD = os.environ.get('MY_GMAIL_PASSWORD')
+
+
+# EMAIL_HOST_USER = 'pcosby50@gmail.com'
+# EMAIL_HOST_PASSWORD = 'Doreen@1000'
+
+# MY_GMAIL = os.environ.get('MY_GMAIL')
+# MY_GMAIL_PASSWORD = os.environ.get('MY_GMAIL_PASSWORD')
