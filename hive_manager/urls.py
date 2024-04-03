@@ -14,9 +14,9 @@ from .views import (HiveListView,
 # app_name = 'hive_manager'
 urlpatterns = [
     # Hive URL
-    path('new_hive/', HiveCreateView.as_view(), name='create_hive'),
+    path('dashboard/create_hive/', HiveCreateView.as_view(template_name= 'hive_manager/create_hive.html'), name='create_hive'),
     path('hive_list/', HiveListView.as_view(), name='hive_list'),
-    path('hive_detail/<int:pk>', HiveDetailView.as_view(), name='hive_detail'),
+    path('hive_detail/<int:pk>', HiveDetailView.as_view(template_name= 'hive_manager/hive_detail.html'), name='hive_detail'),
     path('hive_update/<int:pk>', HiveUpdateView.as_view(), name='hive_update'),
     path('hive_delete/<int:pk>', HiveDeleteView.as_view(), name='hive_delete'),
     path('user_hive_list/<str:username>', UserHiveListView.as_view(), name='user_hive_list'),

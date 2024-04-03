@@ -1,92 +1,258 @@
-{% extends 'hive_manager/base.html' %}
-
+{% load static %} {% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    {% block title %}Dashboard{% endblock %}
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static '/accounts/styles/dash.css' %}" />
 
-    {% comment %} <link rel="stylesheet" type="text/css" href="{% static 'tasks/css/styles.css' %}"> {% endcomment %}
-    <!-- Placeholder for calendar integration -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.0/main.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.0/main.min.css" rel="stylesheet">
-</head>
-<body>
-    {% block content %}
-
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+  </head>
+  <body>
     <div class="container">
-        <h1>Welcome to Your Dashboard</h1>
-
-        <h2>Your Hive:</h2>
-        <ul class="hive-list">
-            {% for hive in hives %}
-                <li><a href="{% url 'hive_detail' hive.id %}">{{ hive.title }}</a></li>
-                {% comment %} <li>{{ hive.title }}</li> {% endcomment %}
-            {% empty %}
-                <li>No Hive found</li>
-            {% endfor %}
+      <nav class="nav">
+        <ul>
+          <li class="padding">
+            <a href="#" class="logo">
+              <img src="/logo.jpg" alt="" />
+              <span class="nav-item">DashBoard</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fas fa-home"></i>
+              <span class="nav-item">Home</span>
+            </a>
+          </li>
+          <li>
+            <a href="profile.html">
+              <i class="fas fa-user"></i>
+              <span class="nav-item">Profile</span>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <i class="fas fa-square"></i>
+              <span class="nav-item">Hives</span>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <i class="fas fa-chart-bar"></i>
+              <span class="nav-item">Analytics</span>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <i class="fas fa-tasks"></i>
+              <span class="nav-item">Tasks</span>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <i class="fas fa-cog"></i>
+              <span class="nav-item">Settings</span>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <i class="fas fa-question-circle"></i>
+              <span class="nav-item">Help</span>
+            </a>
+          </li>
+          <li>
+            <a href="" class="logout">
+              <i class="fas fa-sign-out-alt"></i>
+              <span class="nav-item">Log out</span>
+            </a>
+          </li>
         </ul>
+      </nav>
 
-        <h2>Your Tasks:</h2>
-        <ul class="task-list">
-            {% for task in tasks %}
-                <li><a href="{% url 'task_detail' task.id %}">{{ task.title }}</a></li>
-            {% empty %}
-                <li>No tasks found</li>
-            {% endfor %}
-        </ul>
+      <section class="main">
+        <div class="main-top margin">
+          <h1>Welcome Danny</h1>
+          <i class="fas fa-user-cog"></i>
+        </div>
 
-        <h2>Events:</h2>
-        <ul class="event-list">
-            {% for event in events %}
-                <li>{{ event.title }}</li>
-                <p> start-time</p>
-                <li>{{ event.start_time }}</li>
-                <p> end-time</p>
-                <li>{{ event.end_time }}</li>
-            {% empty %}
-                <li>No Events yet</li>
-            {% endfor %}
-        </ul>
+        <!-- me editting -->
+        <div class="tab">
+          <div class="tab-item">
+            <button id="create_hive" class="hive_btn">
+              <i class="fas fa-square"></i>
+              <span>Create Hive</span>
+            </button>
+            <!-- <button class="hive_btn">
+              <i class="fas fa-square"></i>
+              <span>Hive Details</span>
+            </button> -->
+            <!-- <button id="hivlist" class="hive_btn">
+              <i class="fas fa-square"></i>
+              <span>Hive List</span>
+            </button> -->
+            <button id="create_task" class="hive_btn">
+              <i class="fas fa-square"></i>
+              <span>Create Task</span>
+            </button>
+            <!-- <button class="hive_btn">
+              <i class="fas fa-square"></i>
+              <span>Task List</span>
+            </button> -->
 
-        <h2>Membership:</h2>
-        <ul class="membership-list">
-            {% for membership in memberships %}
-                <li>{{ membership.User }} - {{ membership.hive }} - {{ membership.role }}</li>
-            {% empty %}
-                <li>No membership</li>
-            {% endfor %}
-        </ul>
+            <!-- <button class="hive_btn">
+              <i class="fas fa-square"></i>
+              <span></span>
+            </button> -->
+          </div>
+        </div>
 
-        <!-- Placeholder for calendar widget -->
-        <div id="calendar"></div>
+        <!--  -->
+
+        <div class="main-skills overlay">
+          <div id="hiveCreation" class="card popup">
+            <!-- <i class="fas fa-laptop-code"></i> -->
+            <h3 class="align">New Hive</h3>
+            <form class="forms" action="create_hive/" method="POST">
+              {% csrf_token %} {{ form|crispy }}
+              <label for="Hive_title">Hive Title</label>
+              <input
+                type="text"
+                name="title"
+                id="Hive_title"
+                placeholder="Hive Title"
+              />
+              <label for="hive_desc">Hive Description</label>
+              <textarea
+                class="desc"
+                name="description"
+                id="hive_desc"
+                cols="5"
+                rows="10"
+              ></textarea>
+              <select name="status" id="">
+                <option value="">Status</option>
+                <option value="active">active</option>
+                <option value="completed">completed</option>
+                <option value="cancelled">cancelled</option>
+              </select>
+              <label for="users">Intended Users</label>
+              <input
+                type="number"
+                class="user"
+                id="users"
+                name="intendedUsers"
+              />
+              <label for="start_date">Start Date</label>
+              <input type="date" id="start_date" name="StartDate" />
+              <label for="end_date">End Date</label>
+              <input type="date" id="end_date" name="EndDate" />
+              <button type="submit">Create Hive</button>
+            </form>
+          </div>
+          <div id="hivelist" class="card popup">
+            <!-- <i class="fab fa-wordpress"></i> -->
+            <h3 class="align">Hive List</h3>
+            <ul class="hive_ul">
+              <li>
+                <span>Danny Hive - description</span>
+              </li>
+              <li>
+                <span>Danny Hive - description</span>
+              </li>
+              <li>
+                <span>Danny Hive - description</span>
+              </li>
+            </ul>
+            <!-- <button>Get Started</button> -->
+          </div>
+
+          <div id="taskCreation" class="card popup">
+            <!-- <i class="fas fa-laptop-code"></i> -->
+            <h3 class="align">New Task</h3>
+            <form class="forms" action="" method="post">
+              <label for="hive">Hive</label>
+              <select name="Hive" id="hive">
+                <option value="">Danny</option>
+                <option value="active">Cosby</option>
+                <option value="completed">Peace</option>
+                <option value="cancelled">Mayowa</option>
+              </select>
+              <label for="Hive_title">Task Title</label>
+              <input
+                type="text"
+                name="Hive_title"
+                id="Hive_title"
+                placeholder="Hive Title"
+              />
+              <label for="hive_desc">Task Description</label>
+              <textarea
+                class="desc"
+                name="hive_desc"
+                id="hive_desc"
+                cols="5"
+                rows="10"
+              ></textarea>
+
+              <label for="assign">Assigned To</label>
+              <select name="Hive" id="assign">
+                <option value="">Danny</option>
+                <option value="active">Cosby</option>
+                <option value="completed">Peace</option>
+                <option value="cancelled">Mayowa</option>
+              </select>
+              <label for="start_date">Start Date</label>
+              <input type="date" id="start_date" name="start_title" />
+              <label for="end_date">End Date</label>
+              <input type="date" id="end_date" name="Hive_title" />
+              <button type="submit">Create Task</button>
+            </form>
+          </div>
+          <!-- <div class="card">
+            <i class="fas fa-palette"></i>
+            <h3>graphic design</h3>
+            <p>Join Over 2 million Students.</p>
+            <button>Get Started</button>
+          </div> -->
+          <!-- <div class="card">
+            <i class="fab fa-app-store-ios"></i>
+            <h3>IOS dev</h3>
+            <p>Join Over 1 million Students.</p>
+            <button>Get Started</button>
+          </div> -->
+        </div>
+
+        <section class="main-course">
+          <h1>The INHiVE</h1>
+          <div class="course-box">
+            <ul>
+              <li class="active">In progress</li>
+              <li>Completed</li>
+              <li>finished</li>
+            </ul>
+            <div class="grid-3-cols"></div>
+            <div class="course">
+              {% for hive in hives %}
+              <div class="box">
+                <h4>{{ hive.title }}</h4>
+                <h3 style="width: 80%">{{ hive.title }}</h3>
+                <p>Start Date : {{hive.StartDate}}</p>
+                <p>End Date : {{hive.EndDate}}</p>
+                <button>
+                  <a href="{% url 'hive_detail' hive.id %}">Check Hive</a>
+                </button>
+
+                <!-- <i class="fab fa-html5 html"></i> -->
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </section>
+      </section>
     </div>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            headerToolbar: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'dayGridMonth,timeGridWeek,timeGridDay'
-            },
-            events: [
-                {% for event in events %}
-                {
-                    title: '{{ event.title }}',
-                    start: '{{ event.start_date }}',
-                    end: '{{ event.end_date }}'
-                }
-                {% if not forloop.last %},{% endif %}
-                {% endfor %}
-            ]
-        });
-        calendar.render();
-    });
-</script>
-
-    {% endblock content %}
-</body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="{% static '/accounts/js/script.js' %}"></script>
+  </body>
 </html>
-
