@@ -34,6 +34,106 @@ def register(request):
         form = UserRegisterForm()
     return render(request, 'accounts/register.html', {'form': form})
 
+
+@login_required
+def profile(request):
+    return render(request, 'accounts/profile.html')
+
+
+# user must be logged in to view profile
+@login_required
+def user_update(request):
+    if request.method == 'POST':
+        user_update_form = UserUpdateForm(request.POST, instance=request.user)
+        if user_update_form.is_valid():
+            user_update_form.save()
+            return redirect('profile_update')  # Redirect to profile update form
+    else:
+        user_update_form = UserUpdateForm(instance=request.user)
+    return render(request, 'accounts/user_update.html', {'user_update_form': user_update_form})
+
+
+@login_required
+def profile_update(request):
+    if request.method == 'POST':
+        user_profile_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.userprofile)
+        if user_profile_form.is_valid():
+            user_profile_form.save()
+            return redirect('profile_update')  # Redirect to profile update form
+    else:
+        user_profile_form = ProfileUpdateForm(instance=request.user.userprofile)
+    return render(request, 'accounts/profile_update.html', {'user_profile_form': user_profile_form})
+
+
+
+
+
+
+# def profile(request):
+#     if request.method == 'POST':
+#         user_form = UserUpdateForm(request.POST, instance=request.user)
+#         profile_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.userprofile)
+
+#         # if user_form.is_valid() and profile_form.is_valid:
+#         #save only profile picture
+#             # user_form.save()
+
+#         if user_form.is_valid() and profile_form.is_valid:
+
+#             user_form.save()
+#             profile_form.save()
+
+#             messages.success(request, f'Account Updated!')
+#             return redirect('profile')
+
+#     else:
+#         # forms for user info and profile picture update
+#         user_form = UserUpdateForm(instance=request.user)
+#         profile_form = ProfileUpdateForm(instance=request.user.userprofile)
+
+#     dummy = {
+#         'user_form': user_form,
+#         'profile_form': profile_form
+#     }
+
+#     return render(request, 'accounts/profile.html', dummy)
+
+
+
+def contact(request):
+    return render(request, 'accounts/contact.html')
+
+def home(request):
+    return render(request, 'accounts/home.html')
+
+def about(request):
+    return render(request, 'accounts/about.html')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # @csrf_protect
 # def user_login(request):
 #     if request.method == 'POST':
@@ -53,52 +153,3 @@ def register(request):
 # def logout_view(request):
 #     logout(request)
 #     return redirect('login')
-
-# user must be logged in to view profile
-@login_required
-def profile(request):
-    if request.method == 'POST':
-        user_form = UserUpdateForm(request.POST, instance=request.user)
-        profile_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.userprofile)
-
-        if user_form.is_valid() and profile_form.is_valid:
-            user_form.save()
-            profile_form.save()
-
-            messages.success(request, f'Account Updated!')
-            return redirect('profile')
-
-    else:
-        user_form = UserUpdateForm(instance=request.user)
-        profile_form = ProfileUpdateForm(instance=request.user.userprofile)
-
-    dummy = {
-        'user_form': user_form,
-        'profile_form': profile_form
-    }
-
-    return render(request, 'accounts/profile.html', dummy)
-
-def contact(request):
-    return render(request, 'accounts/contact.html')
-
-def home(request):
-    return render(request, 'accounts/home.html')
-
-def about(request):
-    return render(request, 'accounts/about.html')
-
-# @login_required
-# def dashboard(request):
-#     # Fetch data from models
-#     # tasks = Task.objects.all()
-#     hives = Hive.objects.all()
-#     memberships = Membership.objects.all()
-
-#     context = {
-#         # 'tasks': tasks,
-#         'hives': hives,
-#         'memberships': memberships,
-#     }
-#     return render(request, 'accounts/dashboard.html', context)
-

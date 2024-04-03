@@ -7,6 +7,7 @@ from .models import UserProfile
 
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
+    # bio = forms.Textarea()
 
     class Meta:
         model = User
@@ -19,10 +20,12 @@ class UserUpdateForm(UserCreationForm):
         model = User
         fields = ['username', 'email']
 
+
 class ProfileUpdateForm(forms.ModelForm):
+    bio = forms.Textarea()
     class Meta:
         model = UserProfile
-        fields = ['profile_picture']
+        fields = ['profile_picture', 'bio']
 
 
 

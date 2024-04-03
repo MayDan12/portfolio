@@ -36,7 +36,9 @@ urlpatterns = [
     path('', user_views.home, name='home'),
     # path('dashboard/', user_views.dashboard, name='dashboard'),
     path('about/', user_views.about, name='about'),
+    path('user_update/', user_views.user_update, name='user_update'),
     path('profile/', user_views.profile, name='profile'),
+    path('profile_update/', user_views.profile_update, name='profile_update'),
 
 ]
 

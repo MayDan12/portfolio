@@ -1,4 +1,4 @@
-{% extends "accounts/base.html" %}
+    {% extends "accounts/base.html" %}
     {% load crispy_forms_tags %}
     {% block content %}
     <div class="content-section">
@@ -13,12 +13,20 @@
         </div>
         </div>
     </div>
-    <div  class="content-section">
-        <a href="{% url 'user_update' %}"> Update User Info</a>
-    </div>
 
-    <div  class="content-section">
-        <a href="{% url 'profile_update' %}"> Update Profile Info</a>
-    </div>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Profile Update Info</legend>
+            {{ profile_update_form|crispy }}
 
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Update profile Info
+        </div>
+    </form>
+
+    </div>
     {% endblock content %}
+
+
