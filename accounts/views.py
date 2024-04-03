@@ -47,22 +47,22 @@ def user_update(request):
         user_update_form = UserUpdateForm(request.POST, instance=request.user)
         if user_update_form.is_valid():
             user_update_form.save()
-            return redirect('profile_update')  # Redirect to profile update form
+            return redirect('profile')  # Redirect to profile update form
     else:
         user_update_form = UserUpdateForm(instance=request.user)
     return render(request, 'accounts/user_update.html', {'user_update_form': user_update_form})
 
 
-@login_required
+
 def profile_update(request):
     if request.method == 'POST':
-        user_profile_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.userprofile)
-        if user_profile_form.is_valid():
-            user_profile_form.save()
-            return redirect('profile_update')  # Redirect to profile update form
+        profile_update_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.userprofile)
+        if profile_update_form.is_valid():
+            profile_update_form.save()
+            return redirect('profile')  # Redirect to profile update form
     else:
-        user_profile_form = ProfileUpdateForm(instance=request.user.userprofile)
-    return render(request, 'accounts/profile_update.html', {'user_profile_form': user_profile_form})
+        profile_update_form = ProfileUpdateForm(instance=request.user.userprofile)
+    return render(request, 'accounts/profile_update.html', {'profile_update_form': profile_update_form})
 
 
 
