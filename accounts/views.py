@@ -47,6 +47,7 @@ def user_update(request):
         user_update_form = UserUpdateForm(request.POST, instance=request.user)
         if user_update_form.is_valid():
             user_update_form.save()
+            messages.success(request, f'Account Updated!')
             return redirect('profile')  # Redirect to profile update form
     else:
         user_update_form = UserUpdateForm(instance=request.user)
@@ -59,6 +60,7 @@ def profile_update(request):
         profile_update_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.userprofile)
         if profile_update_form.is_valid():
             profile_update_form.save()
+            messages.success(request, f'Account Updated!')
             return redirect('profile')  # Redirect to profile update form
     else:
         profile_update_form = ProfileUpdateForm(instance=request.user.userprofile)
