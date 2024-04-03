@@ -27,7 +27,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-73)#*6cz=xm2%a&*hr$z9g(%ryjptc^v)td75w43yp**bmjv6v'
 
 
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -155,9 +154,6 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('MY_GMAIL')
 EMAIL_HOST_PASSWORD = os.environ.get('MY_GMAIL_PASSWORD')
 
-
-# EMAIL_HOST_USER = 'pcosby50@gmail.com'
-# EMAIL_HOST_PASSWORD = 'Doreen@1000'
 
 # MY_GMAIL = os.environ.get('MY_GMAIL')
 # MY_GMAIL_PASSWORD = os.environ.get('MY_GMAIL_PASSWORD')
