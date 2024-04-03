@@ -115,8 +115,9 @@
           <div id="hiveCreation" class="card popup">
             <!-- <i class="fas fa-laptop-code"></i> -->
             <h3 class="align">New Hive</h3>
-            <form class="forms" action="create_hive/" method="POST">
-              {% csrf_token %} {{ form|crispy }}
+            {% block content %}
+            <form class="forms" action="create_hive/" method="post">
+              {% csrf_token %} {{ form_class|crispy }}
               <label for="Hive_title">Hive Title</label>
               <input
                 type="text"
@@ -151,6 +152,7 @@
               <input type="date" id="end_date" name="EndDate" />
               <button type="submit">Create Hive</button>
             </form>
+            {% endblock content %}
           </div>
           <div id="hivelist" class="card popup">
             <!-- <i class="fab fa-wordpress"></i> -->

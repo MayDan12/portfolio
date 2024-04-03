@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from .forms import CreateHiveForm
 
 
 @login_required
@@ -55,7 +56,9 @@ class HiveDetailView(LoginRequiredMixin, DetailView):
 
 class HiveCreateView(LoginRequiredMixin, CreateView):
     model = Hive
-    fields = ['title', 'description','intendedUsers', 'status', 'StartDate', 'EndDate']
+    # fields = ['title', 'description','intendedUsers', 'status', 'StartDate', 'EndDate']
+    form_class = CreateHiveForm
+    success_url = reverse_lazy('dashboard')
     template_name = 'hive_manager/create_hive.html'
     context_object_name = 'hives'
     # order = ['-StarDate']
