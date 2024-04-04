@@ -11,9 +11,7 @@
       type="text/css"
       href="{% static '/accounts/styles/home.css' %}"
     />
-    {% comment %}
-    <link rel="stylesheet" href="accounts/styl/style.css" />
-    {% endcomment %}
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
@@ -34,7 +32,7 @@
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
     ></script>
   </head>
-  <body>
+  <body class="body">
     <header>
       <!-- Navigation bar, logo, and other header elements go here -->
       <nav class="navbar">
@@ -115,9 +113,10 @@
 
             <div class="butts">
               <a href="/signup" class="btn-anchor">
-              <button type="submit" class="btn" id="signup">Get Started</button>
+                <button type="submit" class="btn" id="signup">
+                  Get Started
+                </button>
               </a>
-              {% comment %} <a href="/signup" class="btn" id="signup">Get Started</a> {% endcomment %}
 
               <button type="submit" class="btns">Learn More</button>
             </div>

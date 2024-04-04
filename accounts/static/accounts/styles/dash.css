@@ -50,7 +50,7 @@
   border-radius: 0.5rem;
 }
 
-.forms .desc {
+.forms textarea {
   padding: 0.5rem;
   margin-top: 0.5rem;
   border-radius: 0.5rem;
@@ -61,6 +61,10 @@
 
 .forms .user {
   width: 5rem;
+}
+
+.forms select {
+  border: 1px solid #000;
 }
 
 .hide {
@@ -127,6 +131,7 @@
 body {
   background: #dfe9f5;
 }
+
 .container {
   display: flex;
 }
@@ -142,20 +147,22 @@ nav {
   box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
 }
 .logo {
-  text-align: center;
-  display: flex;
-  margin: 10px 0 0 10px;
+  margin: 10px 0 0 0;
+  padding-bottom: 10px;
 }
 .logo img {
   width: 45px;
   height: 45px;
   border-radius: 50%;
 }
-.logo span {
+.logo h2 {
   font-weight: bold;
   padding-left: 15px;
-  font-size: 18px;
+  margin-bottom: 10px;
+  font-size: 20px;
   text-transform: uppercase;
+  float: right;
+  margin-right: 3rem;
 }
 .nav a {
   position: relative;
@@ -176,7 +183,7 @@ nav .fas {
 .nav-item {
   position: relative;
   top: 12px;
-  margin-left: 10px;
+  /* margin-left: 10px; */
 }
 .nav a:hover {
   background: #eee;
@@ -305,7 +312,7 @@ nav .fas {
   margin-top: 3px;
 }
 .box button {
-  background: #000;
+  background: #e9ab17;
   color: #fff;
   padding: 7px 10px;
   border-radius: 10px;

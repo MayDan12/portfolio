@@ -6,17 +6,22 @@ from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from .forms import CreateHiveForm, CreateTaskForm
 
 
 @login_required
 def dashboard(request):
     # Fetch data from models
+    hive_form = CreateHiveForm()
+    task_form = CreateTaskForm()
     tasks = Task.objects.all()
     hives = Hive.objects.all()
     memberships = Membership.objects.all()
     events = Event.objects.all()  # Query all events from the database
 
     context = {
+        'hive_form': hive_form,
+        'task_form': task_form,
         'tasks': tasks,
         'hives': hives,
         'memberships': memberships,
@@ -55,9 +60,11 @@ class HiveDetailView(LoginRequiredMixin, DetailView):
 
 class HiveCreateView(LoginRequiredMixin, CreateView):
     model = Hive
+    hive_form = CreateHiveForm()
     fields = ['title', 'description','intendedUsers', 'status', 'StartDate', 'EndDate']
     template_name = 'hive_manager/create_hive.html'
     context_object_name = 'hives'
+    
     # order = ['-StarDate']
 
     def form_valid(self, form):

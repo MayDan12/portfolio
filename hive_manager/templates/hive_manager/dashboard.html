@@ -18,7 +18,7 @@
           <li class="padding">
             <a href="#" class="logo">
               <img src="/logo.jpg" alt="" />
-              <span class="nav-item">DashBoard</span>
+              <h2 class="nav-item">DashBoard</h2>
             </a>
           </li>
           <li>
@@ -74,7 +74,7 @@
 
       <section class="main">
         <div class="main-top margin">
-          <h1>Welcome Danny</h1>
+          <h1 style="text-transform: capitalize">Welcome {{ user }}</h1>
           <i class="fas fa-user-cog"></i>
         </div>
 
@@ -115,40 +115,9 @@
           <div id="hiveCreation" class="card popup">
             <!-- <i class="fas fa-laptop-code"></i> -->
             <h3 class="align">New Hive</h3>
-            <form class="forms" action="create_hive/" method="POST">
-              {% csrf_token %} {{ form|crispy }}
-              <label for="Hive_title">Hive Title</label>
-              <input
-                type="text"
-                name="title"
-                id="Hive_title"
-                placeholder="Hive Title"
-              />
-              <label for="hive_desc">Hive Description</label>
-              <textarea
-                class="desc"
-                name="description"
-                id="hive_desc"
-                cols="5"
-                rows="10"
-              ></textarea>
-              <select name="status" id="">
-                <option value="">Status</option>
-                <option value="active">active</option>
-                <option value="completed">completed</option>
-                <option value="cancelled">cancelled</option>
-              </select>
-              <label for="users">Intended Users</label>
-              <input
-                type="number"
-                class="user"
-                id="users"
-                name="intendedUsers"
-              />
-              <label for="start_date">Start Date</label>
-              <input type="date" id="start_date" name="StartDate" />
-              <label for="end_date">End Date</label>
-              <input type="date" id="end_date" name="EndDate" />
+            <form class="forms" action="{% url 'create_hive' %}" method="post">
+              {% csrf_token %} {{ hive_form }}
+
               <button type="submit">Create Hive</button>
             </form>
           </div>
@@ -173,40 +142,8 @@
             <!-- <i class="fas fa-laptop-code"></i> -->
             <h3 class="align">New Task</h3>
             <form class="forms" action="" method="post">
-              <label for="hive">Hive</label>
-              <select name="Hive" id="hive">
-                <option value="">Danny</option>
-                <option value="active">Cosby</option>
-                <option value="completed">Peace</option>
-                <option value="cancelled">Mayowa</option>
-              </select>
-              <label for="Hive_title">Task Title</label>
-              <input
-                type="text"
-                name="Hive_title"
-                id="Hive_title"
-                placeholder="Hive Title"
-              />
-              <label for="hive_desc">Task Description</label>
-              <textarea
-                class="desc"
-                name="hive_desc"
-                id="hive_desc"
-                cols="5"
-                rows="10"
-              ></textarea>
+              {% csrf_token %} {{ task_form }}
 
-              <label for="assign">Assigned To</label>
-              <select name="Hive" id="assign">
-                <option value="">Danny</option>
-                <option value="active">Cosby</option>
-                <option value="completed">Peace</option>
-                <option value="cancelled">Mayowa</option>
-              </select>
-              <label for="start_date">Start Date</label>
-              <input type="date" id="start_date" name="start_title" />
-              <label for="end_date">End Date</label>
-              <input type="date" id="end_date" name="Hive_title" />
               <button type="submit">Create Task</button>
             </form>
           </div>
@@ -237,7 +174,7 @@
               {% for hive in hives %}
               <div class="box">
                 <h4>{{ hive.title }}</h4>
-                <h3 style="width: 80%">{{ hive.title }}</h3>
+                <h3 style="width: 90%">{{ hive.description }}</h3>
                 <p>Start Date : {{hive.StartDate}}</p>
                 <p>End Date : {{hive.EndDate}}</p>
                 <button>

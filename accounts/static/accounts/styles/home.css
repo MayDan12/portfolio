@@ -10,19 +10,12 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
-  /* background-color: #fffacd; */
-  /* background-image: url(/Assets/dan2.jpg); */
-  /* background-color: #fffffc; */
+.body {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.dev/svgjs' width='1440' height='560' preserveAspectRatio='none' viewBox='0 0 1440 560'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1605%26quot%3b)' fill='none'%3e%3crect width='1440' height='560' x='0' y='0' fill='url(%26quot%3b%23SvgjsLinearGradient1606%26quot%3b)'%3e%3c/rect%3e%3cpath d='M916.6 597.82C1019.02 542.6 972.67 200.63 1157.76 199.73 1342.86 198.83 1505.48 433.96 1640.09 440.53' stroke='rgba(255%2c 255%2c 255%2c 0)' stroke-width='2'%3e%3c/path%3e%3cpath d='M843.06 643.31C971.88 610.41 1020.78 260.22 1210.39 258.72 1400 257.22 1473.81 448.72 1577.72 454.72' stroke='rgba(255%2c 255%2c 255%2c 0)' stroke-width='2'%3e%3c/path%3e%3cpath d='M291.44 614.43C484.03 604.86 615.22 275.02 980.54 267.95 1345.86 260.88 1493.85 128.66 1669.64 127.95' stroke='rgba(255%2c 255%2c 255%2c 0)' stroke-width='2'%3e%3c/path%3e%3cpath d='M354.06 576.51C519.48 571.8 636.14 336.61 967.22 327.05 1298.31 317.49 1414.73 79.9 1580.39 75.05' stroke='rgba(255%2c 255%2c 255%2c 0)' stroke-width='2'%3e%3c/path%3e%3cpath d='M609.64 610.72C696.18 603.21 660.76 435.3 903.63 425.49 1146.51 415.68 1334.36 205.24 1491.62 201.49' stroke='rgba(255%2c 255%2c 255%2c 0)' stroke-width='2'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1605'%3e%3crect width='1440' height='560' fill='white'%3e%3c/rect%3e%3c/mask%3e%3clinearGradient x1='50%25' y1='100%25' x2='50%25' y2='0%25' gradientUnits='userSpaceOnUse' id='SvgjsLinearGradient1606'%3e%3cstop stop-color='rgba(0%2c 0%2c 0%2c 1)' offset='0'%3e%3c/stop%3e%3cstop stop-color='rgba(24%2c 0%2c 0%2c 1)' offset='1'%3e%3c/stop%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e");
   background-size: cover;
   background-repeat: no-repeat;
   color: #fff;
 }
-
-/* NavBar */
-/* @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"); */
-
 header a {
   text-decoration: none;
 }
