@@ -39,6 +39,10 @@ class HiveListView(LoginRequiredMixin, ListView):
     order = ['-StarDate']
     paginate_by = 2
 
+    def get_queryset(self):
+        # Return an ordered QuerySet
+        return Hive.objects.all().order_by('-StartDate')
+
 
 
 class UserHiveListView(LoginRequiredMixin, ListView):
@@ -64,7 +68,7 @@ class HiveCreateView(LoginRequiredMixin, CreateView):
     fields = ['title', 'description','intendedUsers', 'status', 'StartDate', 'EndDate']
     template_name = 'hive_manager/create_hive.html'
     context_object_name = 'hives'
-    
+
     # order = ['-StarDate']
 
     def form_valid(self, form):
