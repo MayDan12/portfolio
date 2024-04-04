@@ -22,19 +22,19 @@
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="{% url 'home' %}">
               <i class="fas fa-home"></i>
               <span class="nav-item">Home</span>
             </a>
           </li>
           <li>
-            <a href="profile.html">
+            <a href="{% url 'profile' %}">
               <i class="fas fa-user"></i>
               <span class="nav-item">Profile</span>
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="{% url 'hive_list' %}">
               <i class="fas fa-square"></i>
               <span class="nav-item">Hives</span>
             </a>
@@ -46,7 +46,7 @@
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="{% url 'task_list' %}">
               <i class="fas fa-tasks"></i>
               <span class="nav-item">Tasks</span>
             </a>
@@ -64,7 +64,7 @@
             </a>
           </li>
           <li>
-            <a href="" class="logout">
+            <a href="{% url 'logout' %}" class="logout">
               <i class="fas fa-sign-out-alt"></i>
               <span class="nav-item">Log out</span>
             </a>
