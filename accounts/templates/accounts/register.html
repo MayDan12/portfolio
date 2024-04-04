@@ -30,9 +30,9 @@
     ></script>
   </head>
   <body>
-    <header>
+    <header class="nav">
       <!-- Navigation bar, logo, and other header elements go here -->
-      <nav class="navbar">
+      <nav style="color: black" class="navbar">
         <div class="containers">
           <div class="navbar-header">
             <button class="navbar-toggler" data-toggle="open-navbar1">
@@ -41,17 +41,21 @@
               <span></span>
               <span></span>
             </button>
-            <a href="#">
-              <h1>IN<span>HIVE</span></h1>
+            <a class="color" href="#">
+              <h1>INHIVE</h1>
             </a>
           </div>
 
           <div class="navbar-menu" id="open-navbar1">
             <ul class="navbar-nav">
-              <li class="active"><a href="#">Home</a></li>
+              <li class="active"><a class="color" href="#">Home</a></li>
 
-              <li><a href="#">Contact</a></li>
-              <li><a href="{% url 'login' %}" class="navbtn">Sign in</a></li>
+              <li><a class="color" href="#">Contact</a></li>
+              <li>
+                <a class="color" href="{% url 'login' %}" class="navbtn"
+                  >Sign in</a
+                >
+              </li>
             </ul>
           </div>
         </div>
