@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Dashboard</title>
+    <title>INHIVE - Dashboard</title>
     <link rel="stylesheet" href="{% static '/accounts/styles/dash.css' %}" />
 
     <link
@@ -17,7 +17,7 @@
         <ul>
           <li class="padding">
             <a href="#" class="logo">
-              <img src="/logo.jpg" alt="" />
+              <img src="{{ user.userprofile.profile_picture.url }}" alt="" />
               <h2 class="nav-item">DashBoard</h2>
             </a>
           </li>

@@ -64,6 +64,7 @@
 }
 
 .forms select {
+  border-radius: 0.5rem;
   border: 1px solid #000;
 }
 
@@ -151,8 +152,8 @@ nav {
   padding-bottom: 10px;
 }
 .logo img {
-  width: 45px;
-  height: 45px;
+  width: 65px;
+  height: 65px;
   border-radius: 50%;
 }
 .logo h2 {
