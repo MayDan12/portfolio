@@ -140,7 +140,7 @@
 
           <div id="taskCreation" class="card popup">
             <h3 class="align">New Task</h3>
-            <form class="forms" action="" method="post">
+            <form class="forms" action="{% url 'create_task' %}" method="post">
               {% csrf_token %} {{ task_form }}
 
               <button type="submit">Create Task</button>
