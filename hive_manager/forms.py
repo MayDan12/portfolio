@@ -9,5 +9,5 @@ class CreateHiveForm(forms.ModelForm):
 class CreateTaskForm(forms.ModelForm):
   class Meta():
     model = Task
-    fields = ['title', 'description', 'assignedTo', 'StartDate', 'EndDate']
+    fields = ['hive','title', 'description', 'assignedTo', 'StartDate', 'EndDate']
 

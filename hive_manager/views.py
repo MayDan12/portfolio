@@ -128,7 +128,7 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
     model = Task
     task_form = CreateTaskForm()
     fields = ['hive', 'title', 'description', 'assignedTo', 'StartDate', 'EndDate']
-    template_name = 'hive_manager/create_task.html'
+    template_name = 'hive_manager/dashboard.html'
     # context_object_name = 'hives'
     # order = ['-StarDate']
 
