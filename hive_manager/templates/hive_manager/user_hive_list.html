@@ -4,7 +4,7 @@
     <h1 class="mb-3">Hives By {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h1>
     {% for hive in hives %}
         <article class="media content-section">
-            <img class="rounded-circle article-img" src="{{ user.userprofile.profile_picture.url }}">
+            <img class="rounded-circle article-img" src="{{ hive.HiveOwner.userprofile.profile_picture.url }}">
             <div class="media-body">
                 <div class="article-metadata">
                     <a class="mr-2" href="{% url 'user_hive_list' hive.HiveOwner.username %}"></a>

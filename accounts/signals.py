@@ -3,10 +3,11 @@ from django.contrib.auth.models import User
 from django.dispatch import receiver
 from .models import UserProfile
 
+# create profile for new users
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
     if created:
-        UserProfile.objects.create(user=instance)
+        UserProfile.objects.create(user=instance, profile_picture= 'default.jpg')
 
 
 @receiver(post_save, sender=User)
