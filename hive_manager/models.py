@@ -55,6 +55,7 @@ class Membership(models.Model):
     # id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     hive = models.ForeignKey('Hive', on_delete=models.CASCADE)
+    # assigned_task = models.ForeignKey('Task', on_delete=models.SET_NULL, null=True, blank=True)
     roleChoices = [
         ('Member', 'Member'),
         ('QueenBee', 'QueenBee'),
