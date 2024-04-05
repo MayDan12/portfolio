@@ -3,6 +3,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 from .models import Hive, Membership, Task, Event
 from django.urls import reverse_lazy
+from django.contrib import messages
+from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -28,6 +30,13 @@ def dashboard(request):
         'events': events
     }
     return render(request, 'hive_manager/dashboard.html', context)
+
+
+
+def hive_memberships(request, hive_id):
+    hive = Hive.objects.get(pk=hive_id)
+    memberships = Membership.objects.filter(hive=hive)
+    return render(request, 'hive_manager/hive_memberships.html', {'hive': hive, 'memberships': memberships})
 
 
 # view Hive manager
@@ -132,9 +141,44 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
     # context_object_name = 'hives'
     # order = ['-StarDate']
 
+    def dispatch(self, request, *args, **kwargs):
+        # Retrieve the hive ID from the URL parameters
+        hive_id = self.kwargs.get('hive_id')
+        # Retrieve the hive object based on the hive ID
+        hive = Hive.objects.get(id=hive_id)
+
+        # Check if the current user is a member of the hive
+        if not request.user in hive.memberships.all():
+            # If the user is not a member of the hive, display an error message and redirect to the hive list page
+            messages.error(request, "You are not a member of this hive.")
+            return redirect('task_list')
+
+        # Retrieve tasks assigned to the current user in the hive
+        assigned_tasks = Task.objects.filter(hive=hive, assignee=request.user)
+        # Check if the current user is assigned a task in the hive
+        if not assigned_tasks.exists():
+            # If the user is not assigned a task in the hive, display an error message and redirect to the hive detail page
+            messages.error(request, "You are not assigned a task in this hive.")
+            return redirect('hive_detail', hive_id=hive_id)
+
+        # If the user is a member of the hive and assigned a task, proceed with the normal dispatch process
+        return super().dispatch(request, *args, **kwargs)
+
     def form_valid(self, form):
-        form.instance.HiveOwner = self.request.user
+        # Retrieve the hive ID from the URL parameters
+        hive_id = self.kwargs.get('hive_id')
+        # Associate the task with the corresponding hive
+        form.instance.hive = Hive.objects.get(id=hive_id)
         return super().form_valid(form)
+
+    def get_success_url(self):
+        # Retrieve the hive ID from the URL parameters
+        hive_id = self.kwargs.get('hive_id')
+        # Redirect to the hive detail page after successfully creating the task
+        return reverse_lazy('hive_detail', kwargs={'hive_id': hive_id})
+
+
+
 
 class TaskUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Task
@@ -262,6 +306,7 @@ class TaskDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 #         task.delete()
 #         return redirect('task_list')
 #     return render(request, 'tasks/task_confirm_delete.html', {'task': task})
+
 
 
 

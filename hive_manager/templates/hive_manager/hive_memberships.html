@@ -1,0 +1,17 @@
+<!-- hive_memberships.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hive Memberships</title>
+</head>
+<body>
+    <h1>Memberships for {{ hive.title }}</h1>
+    <ul>
+        {% for membership in memberships %}
+            <li>{{ membership.user.username }} - {{ membership.role }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

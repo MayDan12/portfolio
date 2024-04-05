@@ -28,6 +28,7 @@ urlpatterns = [
     # path('hive_list/', views.hive_list, name='hive_list'),
 
 
+    path('hive_detail/<int:hive_id>/memberships/', views.hive_memberships, name='hive_memberships'),
 
     # Task URL
     path('task_list/', TaskListView.as_view(), name='task_list'),
