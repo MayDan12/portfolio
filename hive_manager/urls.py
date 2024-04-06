@@ -35,7 +35,7 @@ urlpatterns = [
     path('task_update/<int:pk>', TaskUpdateView.as_view(), name='task_update'),
     path('task_delete/<int:pk>', TaskDeleteView.as_view(), name='task_delete'),
     path('task_detail/<int:pk>', TaskDetailView.as_view(), name='task_detail'),
-    path('new_task/', TaskCreateView.as_view(), name='create_task'),
+    path('create_task/<int:hive_id>/', TaskCreateView.as_view(), name='create_task'),
 
     # path('<int:hive_id>', views.hive_detail, name='hive_detail'),
     # path('<int:hive_id>', views.update_hive, name='update_hive'),

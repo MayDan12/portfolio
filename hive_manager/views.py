@@ -13,6 +13,7 @@ from .forms import CreateHiveForm, CreateTaskForm
 
 @login_required
 def dashboard(request):
+    hive_id=...
     # Fetch data from models
     hive_form = CreateHiveForm()
     task_form = CreateTaskForm()
@@ -23,6 +24,7 @@ def dashboard(request):
 
     context = {
         'hive_form': hive_form,
+        # 'hive_id': hive_id,
         'task_form': task_form,
         'tasks': tasks,
         'hives': hives,
@@ -150,42 +152,6 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
         if self.request.user == task.assignedTo:
             return True
         return False
-    # def dispatch(self, request, *args, **kwargs):
-    #     # Retrieve the hive ID from the URL parameters
-    #     hive_id = self.kwargs.get('hive_id')
-    #     # Retrieve the hive object based on the hive ID
-    #     hive = Hive.objects.get(id=hive_id)
-
-    #     # Check if the current user is a member of the hive
-    #     membership = Membership.objects.filter(user=request.user, hive=hive).first()
-    #     if not membership:
-    #             # If the user is not a member of the hive, display an error message and redirect to the hive list page
-    #             messages.error(request, "You are not a member of this hive.")
-    #             return redirect('hive_list')
-
-    #     if not membership.assigned_tasks:
-    #         # If the user is not assigned a task in the hive, display an error message and redirect to the hive detail page
-    #         messages.error(request, "You are not assigned a task in this hive.")
-    #         return redirect('hive_detail', hive_id=hive_id)
-
-    #     # If the user is a member of the hive and assigned a task, proceed with the normal dispatch process
-    #     return super().dispatch(request, *args, **kwargs)
-
-
-    # def form_valid(self, form):
-    #     # Retrieve the hive ID from the URL parameters
-    #     hive_id = self.kwargs.get('hive_id')
-    #     # Associate the task with the corresponding hive
-    #     form.instance.hive = Hive.objects.get(id=hive_id)
-    #     return super().form_valid(form)
-
-
-    # def get_success_url(self):
-    #     # Retrieve the hive ID from the URL parameters
-    #     hive_id = self.kwargs.get('hive_id')
-    #     # Redirect to the hive detail page after successfully creating the task
-    #     return reverse_lazy('hive_detail', kwargs={'hive_id': hive_id})
-
 
 
 class TaskUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
