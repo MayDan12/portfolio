@@ -89,10 +89,10 @@
               <i class="fas fa-square"></i>
               <span>Hive Details</span>
             </button> -->
-            <!-- <button id="hivlist" class="hive_btn">
+            <button id="hivlist" class="hive_btn">
               <i class="fas fa-square"></i>
-              <span>Hive List</span>
-            </button> -->
+              <span>Add Member</span>
+            </button>
             <button id="create_task" class="hive_btn">
               <i class="fas fa-square"></i>
               <span>Create Task</span>
@@ -123,19 +123,13 @@
           </div>
           <div id="hivelist" class="card popup">
             <!-- <i class="fab fa-wordpress"></i> -->
-            <h3 class="align">Hive List</h3>
-            <ul class="hive_ul">
-              <li>
-                <span>Danny Hive - description</span>
-              </li>
-              <li>
-                <span>Danny Hive - description</span>
-              </li>
-              <li>
-                <span>Danny Hive - description</span>
-              </li>
-            </ul>
-            <!-- <button>Get Started</button> -->
+            <h3 class="align">Add Member</h3>
+            <form class="forms" action="" method="post">
+              {% csrf_token %} {{ member_form }}
+
+              <button type="submit">Add Member</button>
+              <!-- <button>Get Started</button> -->
+            </form>
           </div>
 
           <div id="taskCreation" class="card popup">
@@ -160,6 +154,9 @@
             <div class="course">
               {% for hive in hives %}
               <div class="box">
+                <p style="font-size: 1rem; font-weight: 500">
+                  {{hive.HiveOwner}}
+                </p>
                 <h4>{{ hive.title }}</h4>
                 <h3 style="width: 90%">{{ hive.description }}</h3>
                 <p>Start Date : {{hive.StartDate}}</p>

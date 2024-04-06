@@ -8,23 +8,29 @@ from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .forms import CreateHiveForm, CreateTaskForm
+from .forms import CreateHiveForm, CreateTaskForm, MembershipForm
+from django.contrib.auth import get_user_model
 
 
 @login_required
 def dashboard(request):
-    hive_id=...
-    # Fetch data from models
     hive_form = CreateHiveForm()
     task_form = CreateTaskForm()
+    member_form = MembershipForm()
     tasks = Task.objects.all()
-    hives = Hive.objects.all()
+    User = get_user_model()
+    current_user = User.objects.get(username=request.user.username)  # Assuming you're using Django's request object to get the current user
+
+    # Filter the Hive objects created by the current user
+    hives = Hive.objects.filter(HiveOwner=current_user)
+    # hives = Hive.objects.filter(membership__user = request.user)
+    # hives = Hive.objects.all()
     memberships = Membership.objects.all()
     events = Event.objects.all()  # Query all events from the database
 
     context = {
+        'member_form': member_form,
         'hive_form': hive_form,
-        # 'hive_id': hive_id,
         'task_form': task_form,
         'tasks': tasks,
         'hives': hives,
