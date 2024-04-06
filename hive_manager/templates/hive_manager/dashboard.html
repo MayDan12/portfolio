@@ -140,7 +140,7 @@
 
           <div id="taskCreation" class="card popup">
             <h3 class="align">New Task</h3>
-            <form class="forms" action="{% url 'create_task' hive_id=hive.id %}" method="post">
+            <form class="forms" action="{% url 'create_task'  %}" method="post">
               {% csrf_token %} {{ task_form }}
 
               <button type="submit">Create Task</button>
@@ -168,9 +168,7 @@
                   <a href="{% url 'hive_detail' hive.id %}">Check Hive</a>
                 </button>
               </div>
-              {% endfor %}
-
-              {% for task in tasks %}
+              {% endfor %} {% for task in tasks %}
               <div class="box">
                 <h4>{{ task.title }}</h4>
                 <h3 style="width: 90%">{{ task.description }}</h3>
@@ -180,12 +178,12 @@
                   <a href="{% url 'task_detail' task.id %}">Check Task</a>
                 </button>
               </div>
-              {% endfor %}
-
-              {% for membership in memberships %}
+              {% endfor %} {% for membership in memberships %}
               <div class="box">
                 <h4>{{ task. }}</h4>
-                <h3 style="width: 90%">Username {{ membership.user.username }}</h3>
+                <h3 style="width: 90%">
+                  Username {{ membership.user.username }}
+                </h3>
                 <p>Role : {{ membership.role}}</p>
                 <p>Title of Hive : {{ membership.hive }}</p>
                 <button>
@@ -193,7 +191,6 @@
                 </button>
               </div>
               {% endfor %}
-
             </div>
           </div>
         </section>
