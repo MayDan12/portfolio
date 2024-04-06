@@ -13,6 +13,7 @@ from .forms import CreateHiveForm, CreateTaskForm
 
 @login_required
 def dashboard(request):
+    hive_id=...
     # Fetch data from models
     hive_form = CreateHiveForm()
     task_form = CreateTaskForm()
@@ -23,6 +24,7 @@ def dashboard(request):
 
     context = {
         'hive_form': hive_form,
+        # 'hive_id': hive_id,
         'task_form': task_form,
         'tasks': tasks,
         'hives': hives,
@@ -142,14 +144,26 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
     # order = ['-StarDate']
 
     def form_valid(self, form):
-        form.instance.assignedTo = self.request.user
+        form.instance.hive = get_object_or_404(Hive, id=self.kwargs['hive_id'])
         return super().form_valid(form)
 
-    def test_func(self):
-        task = self.get_object()
-        if self.request.user == task.assignedTo:
-            return True
-        return False
+    def get_initial(self):
+        initial = super().get_initial()
+        initial['assignedTo'] = self.request.user
+        return initial
+
+    def get_success_url(self):
+        return reverse_lazy('hive_detail', kwargs={'pk': self.kwargs['hive_id']})
+
+    def dispatch(self, request, *args, **kwargs):
+        hive = get_object_or_404(Hive, id=self.kwargs['hive_id'])
+        if hive.HiveOwner != self.request.user:
+            return redirect('dashboard')  # Redirect unauthorized users
+        return super().dispatch(request, *args, **kwargs)
+
+
+
+
     # def dispatch(self, request, *args, **kwargs):
     #     # Retrieve the hive ID from the URL parameters
     #     hive_id = self.kwargs.get('hive_id')
