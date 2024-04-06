@@ -8,8 +8,8 @@ def create_membership(sender, instance, created, **kwargs):
         tasks = Task.objects.filter(hive=instance)
         for task in tasks:
             # Assign roles based on task assignments
-            role = 'QueenBee' if task.assignedTo == instance.created_by else 'Member' or 'Soldier'
+            role = 'QueenBee' if task.assignedTo == instance.created_by else 'Member'
             # Create membership for each user assigned to tasks in the Hive
-            Membership.objects.create(user=task.assigned_to, hive=instance, role=role)
+            Membership.objects.create(user=task.assignedTo, hive=instance, role=role)
 
 
