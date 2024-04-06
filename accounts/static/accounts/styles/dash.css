@@ -184,7 +184,7 @@ nav .fas {
 }
 .nav-item {
   position: relative;
-  top: 12px;
+  top: 10px;
   /* margin-left: 10px; */
 }
 .nav a:hover {
