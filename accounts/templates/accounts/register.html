@@ -71,9 +71,23 @@
       <div id="signup">
         <h2>Welcome To INHIVE!</h2>
         <form action="" method="post">
-          {% csrf_token %} {{ form|crispy }}
+          {% csrf_token %}
+          <!-- {{ form|crispy }} -->
+          {% for field in form %}
+          <div class="form-group">
+            {{ field.label_tag }} {{ field }}
+            <!-- Do not render error messages
+            initially -->
+          </div>
+          {% endfor %}
           <div class="top-row"></div>
-          <button type="submit" class="button button-block">Sign Up</button>
+          <button
+            type="submit"
+            style="margin-top: 0.5rem"
+            class="button button-block"
+          >
+            Sign Up
+          </button>
         </form>
         <p class="align log">
           Have an account? <span><a href="{% url 'login' %}">Log In</a></span>
@@ -81,5 +95,15 @@
       </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      {% if form.errors %}
+           // Iterate over each field's errors and display them as alerts
+           {% for field, errors in form.errors.items %}
+               {% for error in errors %}
+                   alert("{{ error }}");
+               {% endfor %}
+           {% endfor %}
+       {% endif %}
+    </script>
   </body>
 </html>
