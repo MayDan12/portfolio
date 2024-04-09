@@ -1,0 +1,26 @@
+{% extends "accounts/base.html" %} {% load crispy_forms_tags %} {% block content
+%}
+<div class="content-section">
+  <div class="media">
+    <img
+      class="rounded-circle account-img"
+      src="{{ user.userprofile.profile_picture.url }}"
+    />
+    <div class="media-body">
+      <h2 class="account-heading">{{ user.username }}</h2>
+      <p class="text-secondary">{{ user.email }}</p>
+      {% if user.userprofile.bio %}
+      <p class="text-secondary">{{ user.userprofile.bio }}</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+<div class="content-section">
+  <a href="{% url 'user_update' %}"> Update User Info</a>
+</div>
+
+<div class="content-section">
+  <a href="{% url 'profile_update' %}"> Update Profile Info</a>
+</div>
+
+{% endblock content %}
