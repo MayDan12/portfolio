@@ -23,6 +23,11 @@ label {
 
 .navbar {
   background-color: #fff;
+  height: 5rem;
+}
+
+.asteriskField {
+  display: none;
 }
 
 .color {

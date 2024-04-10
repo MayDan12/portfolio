@@ -1,40 +1,4 @@
 $(document).ready(function () {
-  let login_btn = $("#login");
-  let signup_btn = $("#signup");
-
-  let signup = $("#sign_up");
-  let signups = $("#sign_ups");
-
-  let login_page = $("#login_page");
-  let signup_page = $("#signup_page");
-
-  signup_btn.click(function () {
-    window.location.href = "login.html";
-  });
-
-  signup.click(function () {
-    login_page.addClass("hidden");
-    signup_page.addClass("visible");
-  });
-
-  signups.click(function () {
-    login_page.addClass("hidden");
-    signup_page.addClass("visible");
-  });
-
-  login_btn.click(function () {
-    window.location.href = "login.html";
-  });
-
-  var $body = $("body");
-  var $menuTrigger = $body.find(".menu-trigger");
-
-  if ($menuTrigger.length) {
-    $menuTrigger.click(function () {
-      $body.toggleClass("menu-active");
-    });
-  }
-
   // Cache jQuery selectors
   var overlay = $(".overlay"),
     hiveTab = $("#hiveCreation"),

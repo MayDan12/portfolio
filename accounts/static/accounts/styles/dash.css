@@ -66,6 +66,7 @@
 .forms select {
   border-radius: 0.5rem;
   border: 1px solid #000;
+  padding: 0.5rem;
 }
 
 .hide {
@@ -183,7 +184,7 @@ nav .fas {
 }
 .nav-item {
   position: relative;
-  top: 12px;
+  top: 10px;
   /* margin-left: 10px; */
 }
 .nav a:hover {
@@ -338,3 +339,86 @@ nav .fas {
   color: rgb(28, 98, 179);
 }
 /* </span> */
+
+/* <<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>> */
+/* Profile CSS Styles */
+.user_profile {
+  margin-top: 1rem;
+}
+
+.details {
+  display: flex;
+  background-color: #e8eef5;
+  height: 8rem;
+  padding-top: 0.5rem;
+}
+
+.pics {
+  width: 12%;
+  padding-left: 1rem;
+}
+
+.prof_pics {
+  width: 7rem;
+  height: 7rem;
+  border-radius: 5rem;
+}
+
+.user_detail {
+  padding: 0 2rem 0 2rem;
+  width: 60%;
+}
+
+.user_update {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 1rem;
+}
+.user_update h2{
+  padding-left: 1rem;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.form input {
+  display: block;
+  width: 70%;
+  border: 1px solid #000;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: transparent;
+}
+
+.form textarea {
+  background-color: transparent;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #000;
+  resize: none;
+  width: 70%;
+  height: 4rem;
+}
+
+.form .user {
+  width: 5rem;
+}
+
+.form select {
+  border-radius: 0.5rem;
+  border: 1px solid #000;
+  padding: 0.5rem;
+}
+
+.form button {
+  width: 7rem;
+  height: 2.5rem;
+  background-color: #e9ab17;
+  border-radius: 1rem;
+  color: white;
+  font-weight: 700;
+  width: 70%;
+}

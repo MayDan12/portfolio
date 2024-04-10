@@ -1,24 +1,134 @@
-{% extends "accounts/base.html" %}
-    {% load crispy_forms_tags %}
-    {% block content %}
-    <div class="content-section">
-        <div class="media">
-        <img class="rounded-circle account-img" src="{{ user.userprofile.profile_picture.url }}">
-        <div class="media-body">
-            <h2 class="account-heading">{{ user.username }}</h2>
-            <p class="text-secondary">{{ user.email }}</p>
-            {% if user.userprofile.bio %}
-            <p class="text-secondary">{{ user.userprofile.bio }}</p>
-            {% endif %}
-        </div>
-        </div>
-    </div>
-    <div  class="content-section">
-        <a href="{% url 'user_update' %}"> Update User Info</a>
-    </div>
+{% load static %} {% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>INHIVE - Dashboard</title>
+    <link rel="stylesheet" href="{% static '/accounts/styles/dash.css' %}" />
 
-    <div  class="content-section">
-        <a href="{% url 'profile_update' %}"> Update Profile Info</a>
-    </div>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <nav class="nav">
+        <ul>
+          <!-- <li class="padding">
+            <a href="#" class="logo">
+              <img src="{{ user.userprofile.profile_picture.url }}" alt="" />
+              <h2 class="nav-item">DashBoard</h2>
+            </a>
+          </li> -->
+          <li>
+            <a href="{% url 'dashboard' %}">
+              <i class="fas fa-angle-double-left"></i>
+              <span class="nav-item">Back to INHiVE</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'profile' %}">
+              <i class="fas fa-user"></i>
+              <span class="nav-item">Profile</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'hive_list' %}">
+              <i class="fas fa-square"></i>
+              <span class="nav-item">Hives</span>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <i class="fas fa-chart-bar"></i>
+              <span class="nav-item">Analytics</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'task_list' %}">
+              <i class="fas fa-tasks"></i>
+              <span class="nav-item">Tasks</span>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <i class="fas fa-cog"></i>
+              <span class="nav-item">Settings</span>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <i class="fas fa-question-circle"></i>
+              <span class="nav-item">Help</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'logout' %}" class="logout">
+              <i class="fas fa-sign-out-alt"></i>
+              <span class="nav-item">Log out</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
 
-    {% endblock content %}
+      <section class="main">
+        <div class="main-top margin">
+          <h1 style="text-transform: capitalize">Welcome {{ user }}</h1>
+          <i class="fas fa-user-cog"></i>
+        </div>
+
+        <div class="user_profile">
+          <div class="details">
+            <div class="pics">
+              <img
+                class="prof_pics"
+                src="{{ user.userprofile.profile_picture.url }}"
+                alt=""
+              />
+            </div>
+            <div>
+              <div class="user_detail">
+                <h2>{{ user.username }}</h2>
+                <h4>{{ user.email }}</h4>
+                {% if user.userprofile.bio %}
+                <p class="bio">{{ user.userprofile.bio }}</p>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+
+          <div class="user_update">
+            <div class="user_form">
+              <h2>Profile Details</h2>
+              <form class="form" action="{% url 'user_update' %}" method="post">
+                {% csrf_token %} {% for field in user_update_form %}
+                <div>{{ field.label_tag }} {{ field }}</div>
+                {% endfor %}
+                <button style="margin-top: 0.5rem" type="submit">
+                  Update Info
+                </button>
+              </form>
+            </div>
+            <div class="profile_update">
+              <div>
+                <h2>Bio Update</h2>
+                <form
+                  class="form"
+                  action="{% url 'profile_update' %}"
+                  enctype="multipart/form-data"
+                  method="post"
+                >
+                  {% csrf_token %} {{ profile_update|crispy }}
+                  <button type="submit">Update Profile</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="{% static '/accounts/js/script.js' %}"></script>
+  </body>
+</html>

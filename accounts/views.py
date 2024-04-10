@@ -37,7 +37,13 @@ def register(request):
 
 @login_required
 def profile(request):
-    return render(request, 'accounts/profile.html')
+    profile_update = ProfileUpdateForm()
+    user_update_form = UserUpdateForm(instance=request.user)
+    hold = {
+        'profile_update': profile_update,
+        'user_update_form': user_update_form
+    }
+    return render(request, 'accounts/profile.html', hold )
 
 
 # user must be logged in to view profile
