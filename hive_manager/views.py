@@ -18,6 +18,7 @@ def dashboard(request):
     task_form = CreateTaskForm()
     member_form = MembershipForm()
     tasks = Task.objects.all()
+    
     User = get_user_model()
     current_user = User.objects.get(username=request.user.username)  # Assuming you're using Django's request object to get the current user
 

@@ -23,7 +23,7 @@ label {
 
 .navbar {
   background-color: #fff;
-  height: 5rem;
+  height: 5cd po rem;
 }
 
 .asteriskField {
@@ -31,13 +31,13 @@ label {
 }
 
 .color {
-  color: #ff9f0e !important;
+  color: #000000 !important;
   font-weight: 700;
 }
 
 a {
   text-decoration: none;
-  color: #ff9f0e;
+  color: #000000;
   transition: 0.5s ease;
 }
 a:hover {
@@ -51,7 +51,7 @@ a:hover {
   margin: 30px auto;
   border-radius: 15px;
   box-shadow: 0 4px 10px 4px rgba(95, 38, 4, 0.3);
-  color: #ff9f0e;
+  color: #272727;
 }
 
 .tab-group {
