@@ -342,6 +342,10 @@ nav .fas {
 
 /* <<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>> */
 /* Profile CSS Styles */
+.top-margins {
+  margin-top: 3rem;
+}
+
 .user_profile {
   margin-top: 1rem;
 }
@@ -366,7 +370,11 @@ nav .fas {
 
 .user_detail {
   padding: 0 2rem 0 2rem;
-  width: 60%;
+  width: 100%;
+}
+
+.user_detail .bio {
+  width: 100%;
 }
 
 .user_update {
@@ -374,7 +382,7 @@ nav .fas {
   grid-template-columns: 1fr 1fr;
   margin-top: 1rem;
 }
-.user_update h2{
+.user_update h2 {
   padding-left: 1rem;
 }
 .form {
