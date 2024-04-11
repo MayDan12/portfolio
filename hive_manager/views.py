@@ -18,7 +18,7 @@ def dashboard(request):
     task_form = CreateTaskForm()
     member_form = MembershipForm()
     tasks = Task.objects.all()
-    
+
     User = get_user_model()
     current_user = User.objects.get(username=request.user.username)  # Assuming you're using Django's request object to get the current user
 
@@ -150,15 +150,26 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
     # context_object_name = 'hives'
     # order = ['-StarDate']
 
-    def form_valid(self, form):
-        form.instance.assignedTo = self.request.user
-        return super().form_valid(form)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_memberships = Membership.objects.filter(user=self.request.user)
+        hives = user_memberships.values_list('hive', flat=True).distinct()
+        context['hives'] = hives
+        return context
 
-    def test_func(self):
-        task = self.get_object()
-        if self.request.user == task.assignedTo:
-            return True
-        return False
+    def get_success_url(self):
+        # Assuming your Task model has a primary key named 'pk'
+        return reverse_lazy('task_detail', kwargs={'pk': self.object.pk})
+
+    # def form_valid(self, form):
+    #     form.instance.assignedTo = self.request.user
+    #     return super().form_valid(form)
+
+    # def test_func(self):
+    #     task = self.get_object()
+    #     if self.request.user == task.assignedTo:
+    #         return True
+    #     return False
 
 
 class TaskUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
