@@ -305,7 +305,7 @@ nav .fas {
 }
 
 .box a {
-  color: #dfe9f5;
+  color: white;
   text-decoration: none;
 }
 
@@ -314,8 +314,8 @@ nav .fas {
   margin-top: 3px;
 }
 .box button {
-  background: #e9ab17;
-  color: #fff;
+  background: #f39f03;
+  color: white;
   padding: 7px 10px;
   border-radius: 10px;
   margin-top: 2rem;
@@ -429,4 +429,22 @@ nav .fas {
   color: white;
   font-weight: 700;
   width: 70%;
+}
+
+
+/* hIVE LIST */
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.pagination a {
+  padding: 0.5rem;
+  color: #000;
+  margin-top: 0.5rem;
+}
+
+.pagination a:hover {
+  background-color: #e9ab17;
+  border-radius: 0.5rem;
 }

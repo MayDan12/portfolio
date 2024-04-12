@@ -1,0 +1,76 @@
+{% extends "hive_manager/base.html" %}
+
+{% block content %}
+    {% for hive in hives %}
+        <article class="media content-section">
+            <img class="rounded-circle article-img" src="{{ hive.HiveOwner.userprofile.profile_picture.url }}">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <a class="mr-2" href="{% url 'user_hive_list' hive.HiveOwner.username %}">{{ hive.HiveOwner }}</a>
+                    <small class="text-muted">{{ hive.StartDate|date:"F d, Y" }} - {{ hive.EndDate|date:"F d, Y" }}</small>
+                </div>
+                <h2><a class="article-title" href="{% url 'hive_detail' hive.id %}">{{ hive.title }}</a></h2>
+                <p class="article-content">{{ hive.description }}</p>
+                <p class="article-status">Status: {{ hive.status }}</p>
+            </div>
+        </article>
+    {% endfor %}
+
+    {% if is_paginated %}
+    <!-- Check if the current page is not the first page -->
+    {% if page_obj.has_previous %}
+        <!-- Link to the first page -->
+        <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+        <!-- Link to the previous page -->
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    <!-- Loop through each page number in the paginator's page range -->
+    {% for num in page_obj.paginator.page_range %}
+        <!-- Check if the loop's current page number is the same as the current page number -->
+        {% if page_obj.number == num %}
+            <!-- Current page; make it visually different (e.g., solid button) to indicate it's the active page -->
+            <a class="btn btn-solid-info mb-4" href="?page={{ num }}"> {{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+            <!-- Pages within 3 numbers less or more than the current page are displayed for navigation -->
+            <a class="btn btn-outline-info mb-4" href="?page={{ num }}"> {{ num }}</a>
+        {% endif %}
+    {% endfor %}
+
+    <!-- Check if the current page is not the last page -->
+    {% if page_obj.has_next %}
+        <!-- Link to the next page -->
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+        <!-- Link to the last page -->
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+    {% endif %}
+{% endif %}
+
+{% endblock content %}
+
+
+
+{% comment %} <!-- hive_list.html -->
+{% extends 'hive_manager/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}Hive List {% endblock title %}
+</head>
+<body>
+    {% block content %}
+    <h1>Hive List</h1>
+    <ul>
+        {% for hive in hives %}
+            <li><a href="{% url 'hive_detail' hive.id %}">{{ hive.title }}</a></li>
+            {% comment %} <li>>{{ hive.title }}</li> {% endcomment %}
+        {% comment %} {% empty %}
+            <li>No hives found.</li>
+        {% endfor %}
+    </ul>
+    {% endblock content %}
+</body>
+</html> {% endcomment %}
+

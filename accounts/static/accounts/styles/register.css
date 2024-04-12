@@ -23,7 +23,7 @@ label {
 
 .navbar {
   background-color: #fff;
-  height: 5cd po rem;
+  height: 5rem;
 }
 
 .asteriskField {
@@ -72,7 +72,7 @@ a:hover {
 
 h2 {
   text-align: center;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.2;
   margin: 0.5rem 0 20px;
 }
