@@ -1,65 +1,152 @@
-{% extends "hive_manager/base.html" %}
-{% block content %}
-  <article class="media content-section">
-    <img class="rounded-circle article-img" src="{{ object.HiveOwner.userprofile.profile_picture.url }}">
-    <div class="media-body">
-      <div class="article-metadata">
-        <a class="mr-2" href="{% url 'user_hive_list' object.HiveOwner.username %}"> {{ object.HiveOwner }}</a>
-        <h2 class="article-title"> title: {{ object.title }}</h2>
-        <small class="text-muted">start: {{ object.StartDate|date:"F d, Y" }}</small><br>
-        <small class="text-muted">end: {{ object.EndDate|date:"F d, Y" }}</small>
-        {% if object.HiveOwner == user %}
-          <div>
-            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'hive_update' object.id %}">Update</a>
-            <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'hive_delete' object.id %}">Delete</a>
-            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'hive_memberships' object.id %}">View Memberships</a>
+{% load static %} {% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>INHIVE - Hive-Details</title>
+    <link rel="stylesheet" href="{% static '/accounts/styles/dash.css' %}" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <nav class="nav">
+        <ul>
+          <li class="top-margins">
+            <a href="{% url 'dashboard' %}">
+              <i class="fas fa-angle-double-left"></i>
+              <span class="nav-item">Back to INHiVE</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'profile' %}">
+              <i class="fas fa-user"></i>
+              <span class="nav-item">Profile</span>
+            </a>
+          </li>
+          <!-- <li>
+            <a href="{% url 'hive_list' %}">
+              <i class="fas fa-square"></i>
+              <span class="nav-item">Hives</span>
+            </a>
+          </li> -->
+          <!-- <li>
+            <a href="">
+              <i class="fas fa-chart-bar"></i>
+              <span class="nav-item">Analytics</span>
+            </a>
+          </li> -->
+          <!-- <li>
+            <a href="{% url 'task_list' %}">
+              <i class="fas fa-tasks"></i>
+              <span class="nav-item">Tasks</span>
+            </a>
+          </li> -->
+          <li>
+            <a href="">
+              <i class="fas fa-cog"></i>
+              <span class="nav-item">Settings</span>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <i class="fas fa-question-circle"></i>
+              <span class="nav-item">Help</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'logout' %}" class="logout">
+              <i class="fas fa-sign-out-alt"></i>
+              <span class="nav-item">Log out</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <section class="main">
+        <div class="main-top margin">
+          <h1 style="text-transform: capitalize">Welcome {{ user }}</h1>
+          <i class="fas fa-user-cog"></i>
+        </div>
+
+        <div class="user_profile">
+          <div class="details">
+            <div class="pics">
+              <img
+                class="prof_pics"
+                src="{{ object.HiveOwner.userprofile.profile_picture.url }}"
+                alt=""
+              />
+            </div>
+            <div>
+              <div class="user_detail">
+                <h2 style="text-transform: capitalize;">{{ object.HiveOwner }}</h2>
+                <h3>Title: {{ object.title }}</h3>
+                <p>{{ object.StartDate|date:"F d, Y" }} - {{ object.EndDate|date:"F d, Y" }}</p>
+                {% if object.HiveOwner == user %}
+                  <div class="crud">
+                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'hive_update' object.id %}">Update</a>
+                    <a class="btn btn-danger btn-sm mt-1 mb-1" id="hive_delete" href="{% url 'hive_delete' object.id %}">Delete</a>
+                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'hive_memberships' object.id %}">View Memberships</a>
+                  </div>
+                {% endif %}
+                <h3>No of Users: {{ object.intendedUsers }}</h3>
+                <h3 class="article-title">Status: {{ object.status }}</h3>
+                <p class="article-content">Description: {{ object.description }}</p>
+              </div>
+            </div>
           </div>
-        {% endif %}
-      </div>
-      <h2 class="article-title"> No of Users: {{ object.intendedUsers }}</h2>
-      <h2 class="article-title">status: {{ object.status }}</h2>
-      <p class="article-content">content: {{ object.description}}</p>
+          <div class="main-skills overlay">
+            <div id="hivedelete" class="card popup">
+              <!-- <i class="fas fa-laptop-code"></i> -->
+              <h3 class="align">New Hive</h3>
+              <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Delete Hive</legend>
+                    <h2>Are you sure you want to delete the hive "{{ object.title }}"</h2>
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-danger" type="submit">Yes, Delete</button>
+                    <a class="btn btn-outline-secondary" href="{% url 'hive_detail' object.id %}">Cancel</a>
+                </div>
+            </form>
+            </div>
+          </div>
+          <!-- <div class="user_update">
+            <div class="user_form">
+              <h2>Profile Details</h2>
+              <form class="form" action="{% url 'user_update' %}" method="post">
+                {% csrf_token %} {% for field in user_update_form %}
+                <div>{{ field.label_tag }} {{ field }}</div>
+                {% endfor %}
+                <button style="margin-top: 0.5rem" type="submit">
+                  Update Info
+                </button>
+              </form>
+            </div>
+            <div class="profile_update">
+              <div>
+                <h2>Bio Update</h2>
+                <form
+                  class="form"
+                  action="{% url 'profile_update' %}"
+                  enctype="multipart/form-data"
+                  method="post"
+                >
+                  {% csrf_token %} {{ profile_update|crispy }}
+                  <button type="submit">Update Profile</button>
+                </form>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </section>
     </div>
-  </article>
-{% endblock content %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{% comment %}
-{% extends 'hive_manager/base.html' %}
-
-{% block title %}Hive Detail{% endblock %}
-
-{% block content %}
-    <h1>Hive Detail: {{ object.title}}</h1>
-    <h2>Hive-Owner: {{ object.HiveOwner }}</h2>
-    <h2>Description: {{ object.description }}</h2>
-    <h2>Intended Users: {{object.intendedUsers}}</h2>
-    <h2>Start-Date: {{object.StartDate }}</h2>
-    <h2>Deadline: {{object.EndDate }}</h2>
-    <h2>Status: {{object.status }}</h2>
-
-
-    <ul>
-        {% for membership in memberships %}
-            <li>{{ object.HiveOwner }} - {{ membership.role }}</li>
-        {% endfor %}
-    </ul>
-
-{% endblock content %} {% endcomment %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="{% static '/accounts/js/script.js' %}"></script>
+  </body>
+</html>

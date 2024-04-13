@@ -2,6 +2,7 @@ $(document).ready(function () {
   // Cache jQuery selectors
   var overlay = $(".overlay"),
     hiveTab = $("#hiveCreation"),
+    hivedelete = $("#hivedelete"),
     hiveList = $("#hivelist"),
     taskTab = $("#taskCreation");
 
@@ -17,6 +18,7 @@ $(document).ready(function () {
     hiveTab.hide();
     hiveList.hide();
     taskTab.hide();
+    hivedelete.hide()
   }
 
   // Event handler for creating hive
@@ -32,6 +34,11 @@ $(document).ready(function () {
   // Event handler for creating task
   $("#create_task").click(function () {
     showOverlayAndElement(taskTab);
+  });
+
+  
+  $("#hive_delete").click(function () {
+    showOverlayAndElement(hivedelete);
   });
 
   // Event handler for overlay click

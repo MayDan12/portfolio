@@ -353,7 +353,7 @@ nav .fas {
 .details {
   display: flex;
   background-color: #e8eef5;
-  height: 8rem;
+  height: auto;
   padding-top: 0.5rem;
 }
 
@@ -438,7 +438,7 @@ nav .fas {
   justify-content: center;
 }
 
-.pagination a {
+.pagination .crud a {
   padding: 0.5rem;
   color: #000;
   margin-top: 0.5rem;
@@ -447,4 +447,22 @@ nav .fas {
 .pagination a:hover {
   background-color: #e9ab17;
   border-radius: 0.5rem;
+}
+
+.crud {
+
+  margin: 1rem 0 1rem 0;
+}
+
+.crud a {
+  padding: 0.5rem;
+  color: white;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: #e9ab17;
+}
+
+.details .article-content {
+  margin-bottom: 0.5rem;
 }
