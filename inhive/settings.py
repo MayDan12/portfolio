@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import dj_database_url
 import os
 
 # Now you can use functions from the os module
@@ -24,7 +25,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-73)#*6cz=xm2%a&*hr$z9g(%ryjptc^v)td75w43yp**bmjv6v'
+SECRET_KEY = os.environ.get("SECRET_KEY")
+
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -82,17 +84,36 @@ WSGI_APPLICATION = 'inhive.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'postgres',
+#         'USER': 'postgres.lkoqmnfdzcistateomnh',
+#         'HOST': 'aws-0-us-east-1.pooler.supabase.com',
+#         'PORT': '5432',
+#         'PASSWORD': 'Whatismaths101',
+#     }
+# }
+
+# database_url = os.environ.get("DATABASE_URL")
+# # Set default database configuration
+
+# DATABASES = {
+#     'default': dj_database_url.parse(database_url)
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': 'postgres.lkoqmnfdzcistateomnh',
-        'HOST': 'aws-0-us-east-1.pooler.supabase.com',
-        'PORT': '5432',
-        'PASSWORD': 'Whatismaths101',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'inhive',
+        'USER': 'inhive_user',
+        'PASSWORD': 'guCL044KEXSZcYrVmTB9JwSlbLL4bThR',
+        'HOST': 'dpg-coe65m0l6cac73bui9f0-a.oregon-postgres.render.com',
+        'PORT': '5432',  # This is the default port for PostgreSQL
     }
 }
 
+# database_url = "postgres://inhive_user:guCL044KEXSZcYrVmTB9JwSlbLL4bThR@dpg-coe65m0l6cac73bui9f0-a.oregon-postgres.render.com/inhive"
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
