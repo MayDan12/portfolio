@@ -438,7 +438,7 @@ nav .fas {
   justify-content: center;
 }
 
-.pagination .crud a {
+.pagination a {
   padding: 0.5rem;
   color: #000;
   margin-top: 0.5rem;

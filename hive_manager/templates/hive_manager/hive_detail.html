@@ -22,17 +22,17 @@
             </a>
           </li>
           <li>
+            <a href="{% url 'hive_list' %}">
+              <i class="fas fa-square"></i>
+              <span class="nav-item">Hives</span>
+            </a>
+          </li>
+          <li>
             <a href="{% url 'profile' %}">
               <i class="fas fa-user"></i>
               <span class="nav-item">Profile</span>
             </a>
           </li>
-          <!-- <li>
-            <a href="{% url 'hive_list' %}">
-              <i class="fas fa-square"></i>
-              <span class="nav-item">Hives</span>
-            </a>
-          </li> -->
           <!-- <li>
             <a href="">
               <i class="fas fa-chart-bar"></i>
@@ -89,13 +89,18 @@
                 {% if object.HiveOwner == user %}
                   <div class="crud">
                     <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'hive_update' object.id %}">Update</a>
-                    <a class="btn btn-danger btn-sm mt-1 mb-1" id="hive_delete" href="{% url 'hive_delete' object.id %}">Delete</a>
+                    <a class="btn btn-danger btn-sm mt-1 mb-1" id="hive_deletes" href="{% url 'hive_delete' object.id %}">Delete</a>
                     <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'hive_memberships' object.id %}">View Memberships</a>
                   </div>
                 {% endif %}
                 <h3>No of Users: {{ object.intendedUsers }}</h3>
                 <h3 class="article-title">Status: {{ object.status }}</h3>
                 <p class="article-content">Description: {{ object.description }}</p>
+                {% if object.HiveOwner != user %}
+                  <div class="crud">
+                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="">Join Hive</a>
+                  </div>
+                {% endif %}
               </div>
             </div>
           </div>
