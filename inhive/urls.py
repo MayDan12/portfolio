@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 # from hive_manager import views
 # from hive_manager.views import views
 
@@ -30,3 +31,4 @@ urlpatterns = [
 
 
 ]
+urlpatterns += staticfiles_urlpatterns()
