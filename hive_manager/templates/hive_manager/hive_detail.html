@@ -33,18 +33,13 @@
               <span class="nav-item">Profile</span>
             </a>
           </li>
-          <!-- <li>
-            <a href="">
-              <i class="fas fa-chart-bar"></i>
-              <span class="nav-item">Analytics</span>
-            </a>
-          </li> -->
-          <!-- <li>
+         
+          <li>
             <a href="{% url 'task_list' %}">
               <i class="fas fa-tasks"></i>
               <span class="nav-item">Tasks</span>
             </a>
-          </li> -->
+          </li>
           <li>
             <a href="">
               <i class="fas fa-cog"></i>
@@ -88,8 +83,7 @@
                 </h2>
                 <h3>Title: {{ object.title }}</h3>
                 <p>
-                  {{ object.StartDate|date:"F d, Y" }} - {{
-                  object.EndDate|date:"F d, Y" }}
+                  {{ object.StartDate|date:"F d, Y" }} - {{ object.EndDate|date:"F d, Y" }}
                 </p>
                 {% if object.HiveOwner == user %}
                 <div class="crud">
@@ -152,33 +146,6 @@
               </form>
             </div>
           </div>
-          <!-- <div class="user_update">
-            <div class="user_form">
-              <h2>Profile Details</h2>
-              <form class="form" action="{% url 'user_update' %}" method="post">
-                {% csrf_token %} {% for field in user_update_form %}
-                <div>{{ field.label_tag }} {{ field }}</div>
-                {% endfor %}
-                <button style="margin-top: 0.5rem" type="submit">
-                  Update Info
-                </button>
-              </form>
-            </div>
-            <div class="profile_update">
-              <div>
-                <h2>Bio Update</h2>
-                <form
-                  class="form"
-                  action="{% url 'profile_update' %}"
-                  enctype="multipart/form-data"
-                  method="post"
-                >
-                  {% csrf_token %} {{ profile_update|crispy }}
-                  <button type="submit">Update Profile</button>
-                </form>
-              </div>
-            </div>
-          </div> -->
         </div>
       </section>
     </div>
