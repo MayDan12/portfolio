@@ -393,7 +393,7 @@ nav .fas {
 
 .form input {
   display: block;
-  width: 70%;
+  width: 100%;
   border: 1px solid #000;
   padding: 0.5rem;
   border-radius: 0.5rem;
@@ -401,6 +401,8 @@ nav .fas {
 }
 
 .form textarea {
+  width: 100%;
+  display: block;
   background-color: transparent;
   padding: 0.5rem;
   margin-top: 0.5rem;
@@ -416,6 +418,8 @@ nav .fas {
 }
 
 .form select {
+  width: 100%;
+  display: block;
   border-radius: 0.5rem;
   border: 1px solid #000;
   padding: 0.5rem;
@@ -430,7 +434,6 @@ nav .fas {
   font-weight: 700;
   width: 70%;
 }
-
 
 /* hIVE LIST */
 .pagination {
@@ -450,7 +453,6 @@ nav .fas {
 }
 
 .crud {
-
   margin: 1rem 0 1rem 0;
 }
 
