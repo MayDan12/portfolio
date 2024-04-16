@@ -83,23 +83,45 @@
             </div>
             <div>
               <div class="user_detail">
-                <h2 style="text-transform: capitalize;">{{ object.HiveOwner }}</h2>
+                <h2 style="text-transform: capitalize">
+                  {{ object.HiveOwner }}
+                </h2>
                 <h3>Title: {{ object.title }}</h3>
-                <p>{{ object.StartDate|date:"F d, Y" }} - {{ object.EndDate|date:"F d, Y" }}</p>
+                <p>
+                  {{ object.StartDate|date:"F d, Y" }} - {{
+                  object.EndDate|date:"F d, Y" }}
+                </p>
                 {% if object.HiveOwner == user %}
-                  <div class="crud">
-                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'hive_update' object.id %}">Update</a>
-                    <a class="btn btn-danger btn-sm mt-1 mb-1" id="hive_deletes" href="{% url 'hive_delete' object.id %}">Delete</a>
-                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'hive_memberships' object.id %}">View Memberships</a>
-                  </div>
+                <div class="crud">
+                  <a
+                    class="btn btn-secondary btn-sm mt-1 mb-1"
+                    href="{% url 'hive_update' object.id %}"
+                    >Update</a
+                  >
+                  <a
+                    class="btn btn-danger btn-sm mt-1 mb-1"
+                    id="hive_deletes"
+                    href="{% url 'hive_delete' object.id %}"
+                    >Delete</a
+                  >
+                  <a
+                    class="btn btn-secondary btn-sm mt-1 mb-1"
+                    href="{% url 'hive_memberships' object.id %}"
+                    >View Memberships</a
+                  >
+                </div>
                 {% endif %}
                 <h3>No of Users: {{ object.intendedUsers }}</h3>
                 <h3 class="article-title">Status: {{ object.status }}</h3>
-                <p class="article-content">Description: {{ object.description }}</p>
+                <p class="article-content">
+                  Description: {{ object.description }}
+                </p>
                 {% if object.HiveOwner != user %}
-                  <div class="crud">
-                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="">Join Hive</a>
-                  </div>
+                <div class="crud">
+                  <a class="btn btn-secondary btn-sm mt-1 mb-1" href=""
+                    >Join Hive</a
+                  >
+                </div>
                 {% endif %}
               </div>
             </div>
@@ -111,14 +133,23 @@
               <form method="POST">
                 {% csrf_token %}
                 <fieldset class="form-group">
-                    <legend class="border-bottom mb-4">Delete Hive</legend>
-                    <h2>Are you sure you want to delete the hive "{{ object.title }}"</h2>
+                  <legend class="border-bottom mb-4">Delete Hive</legend>
+                  <h2>
+                    Are you sure you want to delete the hive "{{ object.title
+                    }}"
+                  </h2>
                 </fieldset>
                 <div class="form-group">
-                    <button class="btn btn-outline-danger" type="submit">Yes, Delete</button>
-                    <a class="btn btn-outline-secondary" href="{% url 'hive_detail' object.id %}">Cancel</a>
+                  <button class="btn btn-outline-danger" type="submit">
+                    Yes, Delete
+                  </button>
+                  <a
+                    class="btn btn-outline-secondary"
+                    href="{% url 'hive_detail' object.id %}"
+                    >Cancel</a
+                  >
                 </div>
-            </form>
+              </form>
             </div>
           </div>
           <!-- <div class="user_update">
