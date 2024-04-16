@@ -1,44 +1,127 @@
-{% extends "hive_manager/base.html" %}
-
-{% block content %}
-    {% for task in tasks %}
-        <article class="media content-section">
-            <img class="rounded-circle article-img" src="{{ task.assignedTo.user.userprofile.profile_picture.url }}">
-            <div class="media-body">
-                <div class="article-metadata">
-                    <a class="mr-2" href="#">{{ task.assignedTo }}</a>
-                    <small class="text-muted">{{ task.StartDate|date:"F d, Y" }} - {{ hive.EndDate|date:"F d, Y" }}</small>
-                </div>
-                <h2><a class="article-title" href="{% url 'task_detail' task.id %}">{{ task.title }}</a></h2>
-                <p class="article-content">{{ task.description }}</p>
-                {% comment %} <p class="article-status">Status: {{ task.status }}</p> {% endcomment %}
-            </div>
-        </article>
-    {% endfor %}
-{% endblock content %}
-
-
-
-{% comment %} <!-- hive_list.html -->
-{% extends 'hive_manager/base.html' %}
+{% load static %} {% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% block title %}Task List {% endblock title %}
-</head>
-<body>
-    {% block content %}
-    <h1>Task List</h1>
-    <ul>
-        {% for task in tasks %}
-            <li><a href="{% url 'task_detail' task.id %}">{{ task.title }}</a></li>
-            {% comment %} <li>>{{ task.title }}</li> {% endcomment %}
-        {% comment %} {% empty %}
-            <li>No Task found.</li>
-        {% endfor %}
-    </ul>
-    {% endblock content %}
-</body>
-</html> {% endcomment %}
+  <head>
+    <meta charset="UTF-8" />
+    <title>INHIVE - Tasks-list</title>
+    <link rel="stylesheet" href="{% static '/accounts/styles/dash.css' %}" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <nav class="nav">
+        <ul>
+          <li class="top-margins">
+            <a href="{% url 'dashboard' %}">
+              <i class="fas fa-angle-double-left"></i>
+              <span class="nav-item">Back to INHiVE</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'profile' %}">
+              <i class="fas fa-tasks"></i>
+              <span class="nav-item">Tasks</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'profile' %}">
+              <i class="fas fa-user"></i>
+              <span class="nav-item">Profile</span>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <i class="fas fa-cog"></i>
+              <span class="nav-item">Settings</span>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <i class="fas fa-question-circle"></i>
+              <span class="nav-item">Help</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'logout' %}" class="logout">
+              <i class="fas fa-sign-out-alt"></i>
+              <span class="nav-item">Log out</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <section class="main">
+        <div class="main-top margin">
+          <h1 style="text-transform: capitalize">Welcome {{ user }}</h1>
+          <i class="fas fa-user-cog"></i>
+        </div>
+
+        <section class="main-course">
+          <h1>Task List</h1>
+          <div class="course-box">
+            <ul>
+              <li class="active">In progress</li>
+              <li>Completed</li>
+              <li>finished</li>
+            </ul>
+            <div class="grid-3-cols"></div>
+            <div class="course">
+              {% for task in tasks %}
+              <div class="box">
+                <p style="font-size: 1rem; font-weight: 500">
+                  {{ task.assignedTo }}
+                </p>
+                <h4>{{ task.title }}</h4>
+                <h3 style="width: 95%;">{{ task.description }}</h3>
+                <p>{{ task.StartDate }} - {{ task.EndDate }}</p>
+                <p>Status: {{ task.status }}</p>
+                <button>
+                  <a href="{% url 'task_detail' task.id %}">Check Tasks</a>
+                </button>
+              </div>
+              {% endfor %}
+            </div>
+            <div class="pagination">
+
+              {% if is_paginated %}
+                <!-- Check if the current page is not the first page -->
+                {% if page_obj.has_previous %}
+                            <!-- Link to the first page -->
+                      <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+                      <!-- Link to the previous page -->
+                      <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                {% endif %}
+
+                    <!-- Loop through each page number in the paginator's page range -->
+                {% for num in page_obj.paginator.page_range %}
+                        <!-- Check if the loop's current page number is the same as the current page number -->
+                        {% if page_obj.number == num %}
+                            <!-- Current page; make it visually different (e.g., solid button) to indicate it's the active page -->
+                            <a class="btn btn-solid-info mb-4" href="?page={{ num }}"> {{ num }}</a>
+                        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                            <!-- Pages within 3 numbers less or more than the current page are displayed for navigation -->
+                            <a class="btn btn-outline-info mb-4" href="?page={{ num }}"> {{ num }}</a>
+                        {% endif %}
+                {% endfor %}
+              
+                    <!-- Check if the current page is not the last page -->
+                {% if page_obj.has_next %}
+                          <!-- Link to the next page -->
+                          <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+                          <!-- Link to the last page -->
+                          <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+                {% endif %}
+              {% endif %}
+            </div>
+          </div>
+        </section>
+      </section>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="{% static '/accounts/js/script.js' %}"></script>
+  </body>
+</html>

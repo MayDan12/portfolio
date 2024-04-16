@@ -113,19 +113,9 @@ class HiveUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class HiveDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Hive
-    template_name = 'hive_manager/hive_detail.html'
+    template_name = 'hive_manager/delete_hive.html'
     success_url = reverse_lazy('dashboard')
-    # context_object_name = 'hives'
-    # order = ['-StarDate']
-    # def delete(self, request, *args, **kwargs):
-    #     # Call the parent class delete method to perform the actual deletion
-    #     self.object = self.get_object()
-    #     self.object.delete()
-
-    #     # Craft your desired response (e.g., success message)
-    #     message = "Hive successfully deleted!"
-    #     return HttpResponse(message)
-    # # user passes Test to be able to delete hive
+    
     def test_func(self):
         hive = self.get_object()
         if self.request.user == hive.HiveOwner:
