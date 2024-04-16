@@ -45,12 +45,15 @@
 
 .forms input {
   display: block;
+  width: 100%;
   border: 1px solid #000;
   padding: 0.5rem;
   border-radius: 0.5rem;
 }
 
 .forms textarea {
+  display: block;
+  width: 100%;
   padding: 0.5rem;
   margin-top: 0.5rem;
   border-radius: 0.5rem;
@@ -64,6 +67,8 @@
 }
 
 .forms select {
+  display: block;
+  width: 100%;
   border-radius: 0.5rem;
   border: 1px solid #000;
   padding: 0.5rem;
